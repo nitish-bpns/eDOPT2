@@ -7,7 +7,7 @@ import { SectionSplitProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
 import Image from '../elements/Image';
 import Input from '../elements/Input';
-import { Link } from 'react-router-dom';
+import { Link ,Redirect} from 'react-router-dom';
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 
@@ -62,10 +62,33 @@ const FeaturesSplit = ({
     title: '',
     paragraph: '-'
   };
+  
+
+  //console.log(props.location)
+
+  const [redirectpath,setRedirectPath]=useState("/Dashboard1_Donor")
+  
+  
   const [userName,setUserName]=useState('')
   const [password,setPassword]=useState('')
-  const [donortoken,setDonorToken]=useState('')
+  //const [donortoken,setDonorToken]=useState('')
   const [redirect,setRedirect]=useState(false)
+  
+
+  const stateredirect=()=>{
+    try{
+      var x=props.location.state.redirect
+      return x
+    }
+    catch{
+      return("undefined")
+    }
+  }
+
+
+
+  
+  const [state,setState]=useState(stateredirect())
 
   const handleuser = (e)=>{
     setUserName(e.target.value)
@@ -82,13 +105,22 @@ const FeaturesSplit = ({
     headers:{
       email:userName,
       password:password,
-    }
+      redirect:state
+    },withCredentials: true
   }).then((response)=>{
       //console.log('success')
-      console.log(response)
+      //console.log(response)
       
+      if (response.data.redirect!="undefined"){
+        setRedirectPath(response.data.redirect)
+      }
+      setRedirect(true)
   })
 }
+if (redirect){
+  return (<Redirect to={{pathname:redirectpath,state:{'redirected':true}}} />) 
+}
+else{
   return (
     <section
       {...props}
@@ -155,7 +187,7 @@ const FeaturesSplit = ({
     </section>
   );
 }
-
+}
 FeaturesSplit.propTypes = propTypes;
 FeaturesSplit.defaultProps = defaultProps;
 

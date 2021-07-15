@@ -10,8 +10,9 @@ import Input from '../elements/Input';
 import "react-multi-carousel/lib/styles.css";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
-
-
+import {useState, useEffect,useContext} from 'react';
+import axios from "../../api/axios";
+import {x} from './Hero';
 const responsive = {
   superLargeDesktop: {
     // the naming can be any, depends on you.
@@ -84,7 +85,55 @@ const FeaturesSplit = ({
     title: '',
     paragraph: '-'
   };
+
+  const [studentList, setStudentList] = useState([])
+  const [citySearch, setCitySearch] = useState([])
   
+    useEffect(() => {
+        axios.get('/donorFeed', {
+            params:{
+                pageNo:1,
+                size:6
+            }
+        }).then((response)=>{
+            console.log(response.data)
+            if (response.data.error){
+                alert(response.data.message)
+            }else{
+                setStudentList(response.data.message)
+            }
+        })
+    }, []);
+
+    const search = () => {
+        axios.get('/donorFeed', {
+            headers:{
+                'location':citySearch
+            },
+            params:{
+                pageNo:1,
+                size:6
+            }
+        }).then( (response) => {
+            if (response.data.error){
+                alert(response.data.message)
+            }else{
+                setStudentList(response.data.message)
+                console.log(response.data)
+                setCitySearch('')
+            }
+        })
+    }
+     
+  //const {t} = useTranslation();
+    const keyPressHandler = (e)=>{
+      if (e.which === 13) {
+          search()
+      }
+  }
+
+
+
   // alert("Please Use Student's Emails to Schedule a Meeing");
   return (
     <section
@@ -94,146 +143,99 @@ const FeaturesSplit = ({
       <div className="container">
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content">
-            <Input id="newsletter" type="email" label="Subscribe" labelHidden hasIcon="right" placeholder="Search" name="news" style={{margin:"4% 0%", borderRadius:"20px", borderColor:"grey"}}>   
+            <Input id="newsletter" type="text" label="Subscribe" labelHidden hasIcon="right" 
+            value={citySearch} onChange={(e)=>{setCitySearch(e.target.value)}}
+            onKeyPress={keyPressHandler}
+            placeholder="Search by city" name="news" style={{margin:"4% 0%", borderRadius:"20px", borderColor:"grey"}}>   
               <svg width="16" height="12" xmlns="http://www.w3.org/2000/svg">
                 <path d="M9 5H1c-.6 0-1 .4-1 1s.4 1 1 1h8v5l7-6-7-6v5z" fill="#376DF9" />
               </svg>
             </Input>
+      
             <p>How we work</p>
             <p>Checkout our feeds to know more about students!</p>
           </SectionHeader>
           <div className={splitClasses}>
-
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
-                {/* <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div> */}
-                <h4 className="mt-0 mb-12">
-                Pankaj Mishra
-
-                </h4>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                  Age : 17
-                </p>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                I am a bright student in my class. I have keen interest towards astronomy. Now my father is passed due to covid and my family is facing extreme financial difficulties.I come from lower middle class.
-                </p>
-                <center>
-                    <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
-                </center>
+            {studentList.length?studentList.map((student,index)=>{
+              return (
+                <div className="split-item">
+                <div className="split-item-content center-content-mobile " data-reveal-container=".split-item">
+                  {/* <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
+                    Lightning fast workflow
+                    </div> */}
+                  <h4 className="mt-0 mb-12">
+                    {student.name}
+                  </h4>
+                  <p className="m-0" style={{fontSize:"14px"}}>
+                    Age : {student.age}
+                  </p>
+                  <p className="m-0" style={{fontSize:"14px"}}>
+                    {student.intro?student.intro:"No introduction provided!"}
+                  </p>
+                  <center>
+                      <a href={"/Profile/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
+                  </center>
+                </div>
+                <div className={
+                  classNames(
+                    'split-item-image center-content-mobile ',
+                    imageFill && 'split-item-image-fill'
+                  )}
+                  data-reveal-container=".split-item">
+                  <Image
+                    src={student.photo}
+                    alt="Features split 01"
+                    style={{width:"60%"}} />
+                </div>
               </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../../assets/images/i1.jpg')}
-                  alt="Features split 01"
-                  style={{width:"60%"}} />
-              </div>
+
+
+              )
+            }):<div className="split-item">
+            <div className="split-item-content center-content-mobile reveal-from-left"
+                 data-reveal-container=".split-item">
+                <h3 className="mt-0 mb-12">
+                    No Students yet!
+                </h3>
             </div>
+        </div>}
 
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-right" data-reveal-container=".split-item">
-                {/* <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div> */}
-                <h4 className="mt-0 mb-12">
-                  Varsha Ganguly
-                </h4>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                  Age : 19
-                </p>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                I am an athletics girl who loves to play badminton and wants to pursue my career here. I won many medals for my school. Unfortunately this pandemic stuck as bad. My father is on medical rest for life because of nervous disease and my mother passed when i was just 5.
-                </p>
-                <center>
-                    <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
-                </center>
-              </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../../assets/images/i3.jpg')}
-                  alt="Features split 01"
-                  style={{width:"60%"}} />
-              </div>
-            </div>
 
-            <div className="split-item">
-              <div className="split-item-content center-content-mobile reveal-from-left" data-reveal-container=".split-item">
-                {/* <div className="text-xxs text-color-primary fw-600 tt-u mb-8">
-                  Lightning fast workflow
-                  </div> */}
-                <h4 className="mt-0 mb-12">
-                  Vinay Mishra
-                </h4>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                  Age : 16
-                </p>
-                <p className="m-0" style={{fontSize:"14px"}}>
-                I am a bright student in my class. I have keen interest towards astronomy. Now my father is passed due to covid and my family is facing extreme financial difficulties.I come from lower middle class.
-                </p>
-                <center>
-                    <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
-                </center>
-              </div>
-              <div className={
-                classNames(
-                  'split-item-image center-content-mobile reveal-from-bottom',
-                  imageFill && 'split-item-image-fill'
-                )}
-                data-reveal-container=".split-item">
-                <Image
-                  src={require('./../../assets/images/i2.jpg')}
-                  alt="Features split 01"
-                  style={{width:"60%"}} />
-              </div>
-            </div>
+
+    
+
             <br/>
             <br/>
             <Carousel responsive={responsive} style={{alignItems:"center", marginTop:"5%"}}>
-                <div>
+
+              {studentList.length?studentList.map((student,index)=>{
+                  return (
+                    <div>
                 <center>
                 <Image
-                  src={require('./../../assets/images/i1.jpg')}
+                  src={student.photo}
                   alt="Features split 03"
                   style={{width:"50%"}}
                 />
-                <p style={{fontSize:"14px", marginTop:"2%"}}>Ankit Mishra<br/>Age: 15<br/>City: Faridabad<br/></p>
-                <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
+                <p style={{fontSize:"14px", marginTop:"2%"}}>{student.name}<br/>Age: {student.age}<br/>City: {student.city}<br/></p>
+                <a href={"/Profile/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
                 </center>
                 </div>
-                <div>
-                <center>
-                <Image
-                  src={require('./../../assets/images/i2.jpg')}
-                  alt="Features split 03"
-                  style={{width:"50%"}}
-                />
-                <p style={{fontSize:"14px", marginTop:"2%"}}>Palkit Mishra<br/>Age: 17<br/>City: Faridabad<br/></p>
+
+                  )
+
+              }):<div>
+              <center>
+                 Oops, No Students Yet!
+              </center>
+          </div>
+              
+              
+              
+              }
                 
-                <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
-                </center>
-                </div>
-                <div>
-                <center>
-                <Image
-                  src={require('./../../assets/images/i3.jpg')}
-                  alt="Features split 03"
-                  style={{width:"50%"}}
-                />
-                <p style={{fontSize:"14px", marginTop:"2%"}}>Ankita Mishra<br/>Age: 16<br/>City: Faridabad<br/></p>
-                <a href="/Profile" className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
-                </center>
-                </div>
+                
+          
                 {/* <div>
                 <center>
                 <Image

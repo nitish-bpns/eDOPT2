@@ -1,8 +1,10 @@
+import {useState, useEffect,useContext} from 'react';
+import axios from "../../api/axios";
 import React from 'react';
 import classNames from 'classnames';
 import { SectionTilesProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import './style.css'
 import FooterSocial from '../layout/partials/FooterSocial';
 const propTypes = {
@@ -59,6 +61,72 @@ const Testimonial = ({
     invertDesktop && 'invert-desktop',
     alignTop && 'align-top'
   );
+  
+//const [donorToken,setDonorToken]=useState('bearer'+' '+ token)
+const [donorData,setDonorData]=useState('') 
+const [donorStudents,setDonorStudents]=useState([])
+//const [email1,setEmail1]=useState(props.location.state.email)
+const [redirecthome,setRedirectHome]=useState(false)
+
+function getCookie(name) {
+  if (document.cookie && document.cookie !== '') {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i].trim();
+      var cookieValue=0
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+const [email,setEmail]=useState(getCookie('email'))
+useEffect(() => {
+    console.log(getCookie('email'))
+    if  (email){
+    axios.get('/donorDashboard', {
+        headers : {
+            email:email,
+            //authorization: donorToken
+        },withCredentials:true
+    }).then((response) => {
+            console.log(response.data)
+            //console.log(donorToken)
+            setDonorData(response.data)
+            //setToken(donorToken)
+
+        }).catch((err)=>{
+          setRedirectHome(true)
+          //console.log('error')
+          //alert('error')
+        })
+
+        axios.get('/adoptedStudents', {
+          headers : {
+            email:email,
+            //authorization: donorToken
+          },withCredentials:true
+      }).then((response) => {
+              console.log(response.data)
+              setDonorStudents(response.data)
+          }).catch((err)=>{
+            setRedirectHome(true)
+          console.log('error')
+          }) 
+      }
+      else{
+        setRedirectHome(true)
+      }
+}, []);
+
+
+
+if (redirecthome){
+  return(<Redirect to={{pathname:"/Login_Donor",state:{}}} />)
+}
+else{
 
   return (
     <section
@@ -85,12 +153,11 @@ const Testimonial = ({
                       </div>
                   </div>
                   <br/>
-                  <div style={{marginBottom:"2%"}}>
-                      1. Pankaj MIshra
-                  </div>
-                  <div>
-                      2. Varsha Ganguly
-                  </div>
+                  {donorStudents.map((student,index)=>{
+                    return (<div>
+                      {index+1}. {student.name}
+                  </div>)
+                  })}
                   <br/>
                   <a href="/Feed_Donor" style={{color:"#f1b12a", fontSize:"14px"}}>Adopt More</a>
                 </p>
@@ -127,12 +194,12 @@ const Testimonial = ({
                 <center>
                 <img src="https://www.freeiconspng.com/thumbs/person-icon/clipart--person-icon--cliparts-15.png" alt="" style={{width:"2rem", textAlign:"center"}}/>
                 </center>
-                <h2 style={{margin:"0", color:"black", fontSize:"25px", textAlign:"center"}}>Piyush Rastogi</h2>
+                <h2 style={{margin:"0", color:"black", fontSize:"25px", textAlign:"center"}}>{donorData.name}</h2>
                 <br/>
                 <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"16px"}}>
-                  City : Delhi<br></br>
-                  Pin Code: 110094<br></br>
-                  Phone no.: 7685945324<br></br>
+                  City : {donorData.city}<br></br>
+                  Pin Code: {donorData.pin}<br></br>
+                  Phone no.: {donorData.phone}<br></br>
                 </p>
                 </div>
               </div>
@@ -145,7 +212,7 @@ const Testimonial = ({
     </section>
   );
 }
-
+}
 Testimonial.propTypes = propTypes;
 Testimonial.defaultProps = defaultProps;
 

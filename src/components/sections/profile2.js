@@ -1,13 +1,15 @@
-import React, {useState} from 'react';
+
 import classNames from 'classnames';
 import { SectionSplitProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
 import Image from '../elements/Image';
 import Input from '../elements/Input';
-import { Link } from 'react-router-dom';
+import { Link ,Redirect} from 'react-router-dom';
 import Modal from '../elements/Modal';
 import './style.css'
 import FooterSocial from '../layout/partials/FooterSocial';
+import axios from "../../api/axios";
+import React, {useContext, useEffect, useState} from 'react';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -70,7 +72,79 @@ const FeaturesSplit = ({
     title: '',
     paragraph: ''
   };
-  alert("Login to Schedule a Meeting!")
+  //alert("Login to Schedule a Meeting!")
+  console.log(props)
+  const getid=()=>{
+    const arr=props.location.pathname.split('/')
+    return arr[2]
+  }
+  const [studentid,setStudentId]=useState(getid())
+  const [student,setStudent]=useState({})
+  const [redirecthome,setRedirectHome]=useState(false)
+  const [found,setFound]=useState(false)
+
+
+
+  function getCookie(name) {
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        var cookieValue=0
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const [email,setEmail]=useState(getCookie('email'))
+  //alert("Login to Schedule a Meeting!")
+  useEffect(()=>{
+      try{
+      console.log(studentid)
+      axios.get('/studentdata',{
+        headers:{
+          id:studentid
+        }
+      }).then((response)=>{
+        setStudent(response.data.student)
+        setFound(true)
+        console.log(response.data)
+        if (!response.data.status){
+          setRedirectHome(true)
+        }
+        else{
+          if (email){
+            axios.get('/checkapprovel',{
+              headers:{
+                'studentid':studentid,
+                'donoremail':email
+              }
+              }).then((response)=>{
+                console.log(response.data)
+            })
+          }
+        }
+      }).catch((err)=>{
+        console.log('errorsdfgh')
+        setRedirectHome(true)
+        
+      })
+    }
+    catch(err){
+      console.log('error')
+      setRedirectHome(true)
+    }
+
+  },[])
+  console.log(redirecthome)
+  if (redirecthome){
+    alert('no such user exists')
+    return(<Redirect to={{pathname:"/Feed_Donor",state:{}}} />)
+  }
+  else{
   return (
     <section
       {...props}
@@ -154,6 +228,7 @@ const FeaturesSplit = ({
       </div>
     </section>
   );
+}
 }
 
 FeaturesSplit.propTypes = propTypes;

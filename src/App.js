@@ -65,8 +65,8 @@ const App = () => {
           <AppRoute exact path="/Dashboard2_Donor" component={Dash2Donor} layout={LayoutDonor} />
           <AppRoute exact path="/Dashboard3_Donor" component={Dash3Donor} layout={LayoutDonor} />
           <AppRoute exact path="/Dashboard4_Donor" component={Dash4Donor} layout={LayoutDonor} />
-          <AppRoute exact path="/News_Donor" component={NewsDonor} layout={LayoutDonor} />
-          <AppRoute exact path="/Feed_Donor" component={FeedDonor} layout={LayoutDonor} />
+          <AppRoute exact path="/News_Donor" component={NewsDonor} layout={LayoutDefault} />
+          <AppRoute exact path="/Feed_Donor" component={FeedDonor} layout={LayoutDefault} />
           <AppRoute exact path="/Terms" component={Terms} layout={LayoutDefault} />
           <AppRoute exact path="/Pay" component={Pay} layout={LayoutDefault} />
           <AppRoute exact path="/features" component={features} layout={LayoutDefault} />
@@ -79,6 +79,8 @@ const App = () => {
           <AppRoute exact path="/Login_Student" component={LoginStudent} layout={LayoutDefault} />
           <AppRoute exact path="/Signup_Student" component={SignupStudent} layout={LayoutDefault} />
           <AppRoute exact path="/Dashboard1_Student" component={Dash1Student} layout={LayoutStudent} />
+          <AppRoute exact path="/Profile/:userId" component={Profile} layout={LayoutDefault}/>
+          <AppRoute exact path="/Profile2/:userId" component={profile2} layout={LayoutDefault}/>
         </Switch>
       )} />
   );

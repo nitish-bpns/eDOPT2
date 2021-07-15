@@ -7,14 +7,14 @@ import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 import Profile from '../components/sections/profile';
 
-const Home = () => {
+const Home = (props) => {
 
   return (
     <>
     <br/>
     <br/>
     <br/>
-    <Profile className="illustration-section-01"/>
+    <Profile {...props} className="illustration-section-01"/>
     <br/>
     <br/>
 

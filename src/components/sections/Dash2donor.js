@@ -1,10 +1,12 @@
+import {useState, useEffect,useContext} from 'react';
+import axios from "../../api/axios";
 import React from 'react';
 import classNames from 'classnames';
 import { SectionSplitProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
 import Image from '../elements/Image';
 import Input from '../elements/Input';
-import { Link } from 'react-router-dom';
+import { Link ,Redirect} from 'react-router-dom';
 import './style.css'
 import FooterSocial from '../layout/partials/FooterSocial';
 
@@ -58,7 +60,70 @@ const FeaturesSplit = ({
     title: '',
     paragraph: ''
   };
-
+  const [donorData,setDonorData]=useState('') 
+  const [donorStudents,setDonorStudents]=useState([])
+  //const [email1,setEmail1]=useState(props.location.state.email)
+  const [redirecthome,setRedirectHome]=useState(false)
+  
+  function getCookie(name) {
+    if (document.cookie && document.cookie !== '') {
+      var cookies = document.cookie.split(';');
+      for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        var cookieValue=0
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const [email,setEmail]=useState(getCookie('email'))
+  useEffect(() => {
+      console.log(getCookie('email'))
+      if  (email){
+      axios.get('/donorDashboard', {
+          headers : {
+              email:email,
+              //authorization: donorToken
+          },withCredentials:true
+      }).then((response) => {
+              console.log(response.data)
+              //console.log(donorToken)
+              setDonorData(response.data)
+              //setToken(donorToken)
+  
+          }).catch((err)=>{
+            setRedirectHome(true)
+            //console.log('error')
+            //alert('error')
+          })
+  
+          axios.get('/adoptedStudents', {
+            headers : {
+              email:email,
+              //authorization: donorToken
+            },withCredentials:true
+        }).then((response) => {
+                console.log(response.data)
+                setDonorStudents(response.data)
+            }).catch((err)=>{
+              setRedirectHome(true)
+            console.log('error')
+            }) 
+        }
+        else{
+          setRedirectHome(true)
+        }
+  }, []);
+  
+  
+  
+  if (redirecthome){
+    return(<Redirect to={{pathname:"/Login_Donor",state:{}}} />)
+  }
+  else{
   return (
     <section
       {...props}
@@ -74,56 +139,39 @@ const FeaturesSplit = ({
                 <p className="m-0" style={{alignItems:"center"}}>
                   <a href="/Feed_Donor" style={{color:"#f1b12a", fontSize:"14px", margin:"0rem"}}>Adopt More</a>
                   <br/>
-                    <div style={{border:"1px solid #f1b12a", padding:"7%", margin:"4% 0%", borderRadius:"20px", boxShadow: "5px 5px #f1f1f1"}}>
+                  {donorStudents.map((student,index)=>{
+                    return (
+                        <div style={{border:"1px solid #f1b12a", padding:"7%", margin:"4% 0%", borderRadius:"20px", boxShadow: "5px 5px #f1f1f1"}}>
                         <div className="row"> 
                                 <div className="column" style={{padding:"1%"}}>
-                                    <img src={require('./../../assets/images/i2.jpg')} alt="" style={{width:"70%"}}/>
+                                    <img src={student.photo} alt="" style={{width:"70%"}}/>
                                     <br/>
                                     <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"14px"}}>
-                                        Pankaj Mishra
+                                        {student.name}
                                     </p>
                                     <br/>
                                     <br/>
-                                    <Link to="/Dashboard3_Donor" className="button button-primary button-wide-mobile button-sm" onClick="" style={{backgroundColor:"#f1b12a"}}>Show More</Link>
+                                    <Link to={{pathname:"/Dashboard3_Donor",state:{semail:student.email,student:student}}} className="button button-primary button-wide-mobile button-sm" onClick="" style={{backgroundColor:"#f1b12a"}}>Show More</Link>
                                 </div>
                                 <div className="column" style={{padding:"1%"}}>
                                     <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"14px"}}>
                                         
-                                            Age : 17<br/>
-                                            Gender : Male<br/>
-                                            City : Faridabad<br/>
-                                            Phone No : 8745372736<br/>
-                                            Class : 10th<br/>
+                                            Age : {student.age}<br/>
+                                            Gender : {student.gender}<br/>
+                                            City : {student.city}<br/>
+                                            Phone No : {student.phone}<br/>
+                                            Class : {student.grade}th<br/>
                                         
                                     </p>
                                 </div>
                         </div>
                     </div>
-                    <div style={{border:"1px solid #f1b12a", padding:"7%", margin:"4% 0%", borderRadius:"20px", boxShadow: "5px 5px #f1f1f1"}}>
-                        <div className="row"> 
-                                <div className="column" style={{padding:"1%"}}>
-                                    <img src={require('./../../assets/images/i3.jpg')} alt="" style={{width:"70%"}}/>
-                                    <br/>
-                                    <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"14px"}}>
-                                        Varsha Ganguly
-                                    </p>
-                                    <br/>
-                                    <br/>
-                                    <Link to="/Dashboard3_Donor" className="button button-primary button-wide-mobile button-sm" onClick="" style={{backgroundColor:"#f1b12a"}}>Show More</Link>
-                                </div>
-                                <div className="column" style={{padding:"1%"}}>
-                                    <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"14px"}}>
-                                    
-                                        Age : 19<br/>
-                                        Gender : Female<br/>
-                                        City : Bangalore<br/>
-                                        Phone No : 9898975352<br/>
-                                        Class : 11th<br/>
-                                    
-                                    </p>
-                                </div>
-                        </div>
-                    </div>
+                        
+
+                    )
+                  })}
+                    
+                    
                 </p>
               </div>
               <div className='split-item-image center-content-mobile reveal-from-bottom' data-reveal-container=".split-item" style={{paddingLeft:"2%"}}>
@@ -223,7 +271,7 @@ const FeaturesSplit = ({
     </section>
   );
 }
-
+}
 FeaturesSplit.propTypes = propTypes;
 FeaturesSplit.defaultProps = defaultProps;
 
