@@ -69,7 +69,7 @@ const Testimonial = ({
   const [percentageMarks, setPercentageMarks] = useState([]);   
   const [redirecthome,setRedirectHome]=useState(false)
   
-  console.log(props.location.state)
+  //console.log(props.location.state)
   function getCookie(name) {
     if (document.cookie && document.cookie !== '') {
       var cookies = document.cookie.split(';');

@@ -164,7 +164,7 @@ const FeaturesSplit = ({
                         <div className="row"> 
                                 <div className="column" style={{padding:"1% 1% 1% 0%"}}>
                                     <center>
-                                    <img src={require('./../../assets/images/i3.jpg')} alt="" style={{width:"70%"}}/>
+                                    <img src={found?student.photo:''} alt="" style={{width:"70%"}}/>
                                     </center>
                                     <p className="text-sm mb-0" style={{textAlign:"center", fontSize:"14px"}}>
                                         

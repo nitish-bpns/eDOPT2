@@ -1,7 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from "../../api/axios"
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'react-router-dom';
+import { Link ,Redirect} from 'react-router-dom';
 import Logo from './partials/Logo';
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
@@ -78,6 +79,19 @@ const Header = ({
     className
   );
 
+
+  const [redirecthome,setRedirectHome]=useState(false)
+  const logouthandler=(e)=>{
+    axios.get('/logout',{withCredentials:true})
+    .then((response)=>{
+      setRedirectHome(true)
+    })
+  }  
+
+  if (redirecthome){
+    return(<Redirect to={{pathname:"/Login_Student",state:{}}} />)
+  }
+  else{
   return (
     <header
       {...props}
@@ -130,7 +144,7 @@ const Header = ({
                       className="list-reset header-nav-right"
                     >
                       <li>
-                        <Link to="/Login_Student" className="button button-primary button-wide-mobile button-sm" onClick={closeMenu} style={{backgroundColor:"#f1b12a"}}>Logout</Link>
+                        <button onClick={logouthandler}  className="button button-primary button-wide-mobile button-sm"  style={{backgroundColor:"#f1b12a"}}>Logout</button>
                       </li>
                     </ul>}
                 </div>
@@ -141,7 +155,7 @@ const Header = ({
     </header>
   );
 }
-
+}
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;
 

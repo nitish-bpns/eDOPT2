@@ -309,6 +309,7 @@ const Header = ({
   useEffect(()=>{
       axios.get('/isloggedin',{headers:{email:email},withCredentials:true})
       .then((response)=>{
+        console.log(response.data)
         if (response.data.status){setLog(true)}  
         else{setLog(false)}  
           

@@ -92,7 +92,7 @@ useEffect(() => {
             //authorization: donorToken
         },withCredentials:true
     }).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             //console.log(donorToken)
             setDonorData(response.data)
             //setToken(donorToken)

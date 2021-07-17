@@ -6,11 +6,11 @@ import FeaturesSplit from '../components/sections/FeaturesSplit';
 import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 
-const Home = () => {
+const Home = (props) => {
 
   return (
     <>
-      <Donorsign className="illustration-section-01" />
+      <Donorsign {...props} className="illustration-section-01" />
     </>
   );
 }

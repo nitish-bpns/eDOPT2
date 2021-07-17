@@ -1,13 +1,14 @@
-import React from 'react';
+
 import classNames from 'classnames';
 import { SectionSplitProps } from '../../utils/SectionProps';
 import SectionHeader from './partials/SectionHeader';
 import Image from '../elements/Image';
 import Input from '../elements/Input';
-import { Link } from 'react-router-dom';
+import { Link,Redirect } from 'react-router-dom';
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
-
+import axios from "../../api/axios";
+import React, {useContext, useEffect, useState} from 'react';
 
 const propTypes = {
   ...SectionSplitProps.types
@@ -60,6 +61,39 @@ const FeaturesSplit = ({
     paragraph: '-'
   };
 
+
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [redirect,setRedirect] = useState('');
+    //const [token, setToken] = useState({});
+    
+    const studentLoginHandler = (e)=>{
+        e.preventDefault()
+        if (!username){
+            alert("please enter Username")
+        }
+        axios.get('/studentLogin',{
+            headers: {
+                'email':username,
+                'password':password
+            },withCredentials:true
+        }).then((response)=>{
+            //console.log(response.data)
+            if (response.data.status){
+            setRedirect(true)}
+            else{alert(response.data.messege)}
+        })
+        //.catch((err)=>{
+          //  alert('password or username incorrect')
+        //})
+        
+    }
+    if (redirect){
+      return (<Redirect to={{pathname:"/Dashboard1_Student",state:{}}} />)
+  }
+  else{
+
+
   return (
     <section
       {...props}
@@ -79,9 +113,9 @@ const FeaturesSplit = ({
                 </h3> */}
                 <p className="m-0">
                   <form>
-                    <Input id="newsletter" type="email" hasIcon="right" placeholder="Your Username" name="username" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
+                    <Input value={username} onChange={(e)=>{setUsername(e.target.value)}} id="newsletter"  hasIcon="right" placeholder="Your Username" name="username" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
                     </Input>
-                    <Input id="newsletter" type="password" hasIcon="right" placeholder="Your Password" name="password" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
+                    <Input value={password} onChange={(e)=>{setPassword(e.target.value)}} id="newsletter" type="password" hasIcon="right" placeholder="Your Password" name="password" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
                     </Input>
                     {/* <center>
                       <br />
@@ -99,7 +133,12 @@ const FeaturesSplit = ({
                     </center> */}
                     <br />
                     <center>
-                      <Link to="Dashboard1_Student" className="button button-primary button-wide-mobile button-sm" onClick="" style={{ backgroundColor: "#f1b12a", borderRadius: "20px" }}>Login</Link>
+                    <button type="submit"
+                       className="button button-primary button-wide-mobile button-sm"
+                        onClick={studentLoginHandler} style={{
+                        backgroundColor: "#3d946e",
+                        borderRadius: "20px"
+                              }}>Login</button>
                       <br /><br />Don't Have an Account? <a href="/Signup_Student">Signup</a>
                     </center>
                   </form>
@@ -125,7 +164,7 @@ const FeaturesSplit = ({
     </section>
   );
 }
-
+}
 FeaturesSplit.propTypes = propTypes;
 FeaturesSplit.defaultProps = defaultProps;
 

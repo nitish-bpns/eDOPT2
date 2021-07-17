@@ -115,8 +115,8 @@ const FeaturesSplit = ({
     }
   }
   const [redirected,setRedirected]=useState(false)
-  console.log(props.location)
-
+  //console.log(props.location)
+  const [donorData,setDonorData]=useState('') 
 
   //alert("Login to Schedule a Meeting!")
   useEffect(()=>{
@@ -124,7 +124,6 @@ const FeaturesSplit = ({
       //if (redirected){
       //  re
       //}
-
       try{
       axios.get('/studentdata',{
         headers:{
@@ -151,6 +150,19 @@ const FeaturesSplit = ({
                 }
 
             })
+            axios.get('/donorDashboard', {
+              headers : {
+                  email:email,
+                  //authorization: donorToken
+              },withCredentials:true
+          }).then((response) => {
+                  console.log(response.data)
+                  //console.log(donorToken)
+                  setDonorData(response.data)
+                  //setToken(donorToken)
+      
+              })
+            
           }
         }
       }).catch((err)=>{
@@ -172,7 +184,10 @@ const FeaturesSplit = ({
         params:{
           'studentid':studentid,
           'donoremail':email,
-          'studentemail':student.email
+          'studentemail':student.email,
+          'studentname':student.name,
+          'donorname':donorData.name
+
         },withCredentials:true
       }).then((response)=>{
         console.log(response.data)
@@ -218,8 +233,12 @@ const FeaturesSplit = ({
           <h6 style= {{color: "black"}}> {found?student.name:''} </h6>
           <h6 style= {{color: "black"}}> Age : {found?student.age:''} </h6>
           <p>{requestStatus?status:''} </p>
-          <button onClick={schedulehandler} className="button button-primary button-wide-mobile button-sm schedule-meet-btn" 
-          style={{backgroundColor:"#f1b12a", margin:"1%", borderRadius:"20px"}}>Schedule a Meeting</button>
+          {status=="approved"?
+           <button  className="button button-primary button-wide-mobile button-sm schedule-meet-btn" 
+           style={{backgroundColor:"#f1b12a", margin:"1%", borderRadius:"20px"}}>Shedule Meeting</button> 
+          :<button onClick={schedulehandler} className="button button-primary button-wide-mobile button-sm schedule-meet-btn" 
+          style={{backgroundColor:"#f1b12a", margin:"1%", borderRadius:"20px"}}>eDOPT/request Meeting</button>}
+          
           </center>
         </div>
       </div>

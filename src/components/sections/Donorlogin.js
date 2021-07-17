@@ -110,11 +110,14 @@ const FeaturesSplit = ({
   }).then((response)=>{
       //console.log('success')
       //console.log(response)
-      
+      if (response.data.status){
       if (response.data.redirect!="undefined"){
         setRedirectPath(response.data.redirect)
       }
-      setRedirect(true)
+      setRedirect(true)}
+      else{
+        alert(response.data.messege)
+      }
   })
 }
 if (redirect){
