@@ -5,13 +5,19 @@ import FeaturesTiles from '../components/sections/FeaturesTiles';
 import FeaturesSplit from '../components/sections/FeaturesSplit';
 import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
-import Terms from '../components/sections/Terms';
+import AboutUs from '../components/sections/About_us';
 
-const Home = (props) => {
+const Home = () => {
 
   return (
     <>
-    <Terms {...props} className="illustration-section-01"/>
+    <br/>
+    <br/>
+    <br/>
+    <AboutUs className="illustration-section-01"/>
+    <br/>
+    <br/>
+
     </>
   );
 }

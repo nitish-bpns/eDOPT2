@@ -499,6 +499,7 @@ const Hero = ({
         <br />
         <br className= "remove-in-mobile" />
         <br className= "remove-in-mobile" />
+        {/*}
         <img src="s4.png" alt="" style={{ width: "50%" }} />
         <br />
         <br className= "remove-in-mobile" />
@@ -549,6 +550,7 @@ const Hero = ({
         <br />
         <br className= "remove-in-mobile" />
         <br className= "remove-in-mobile" />
+            */}
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -607,6 +609,7 @@ const Hero = ({
         <br />
         <br className= "remove-in-mobile" />
         <br className= "remove-in-mobile" />
+        {/*
         <center>
           <h4 style={{ color: "black" }}>Featured In</h4>
         </center>
@@ -644,10 +647,10 @@ const Hero = ({
             </center>
           </div>
         </Carousel>
-        <br />
+        <br /> */}
         <br className= "remove-in-mobile" />
         <b style={{ color: "black" }}>
-          Have a question? Check out our FAQs page or chat with us on Whatsapp
+          Have a question? chat with us on Whatsapp
         </b>
         <Button
           tag="a"

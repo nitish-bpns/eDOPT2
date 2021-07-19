@@ -147,6 +147,8 @@ else{
                     </Input>
                     <Input onChange={handlepassword} id="newsletter" type="password"  value={password} hasIcon="right" placeholder="Your Password" name="password" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
                     </Input>
+                    <a href="/ForgetPass" style= {{color: "black", fontSize: "11px"}}>Forgot Your Password</a>
+
                     <center>
                       <br />
                       <div className="row">

@@ -7,11 +7,11 @@ import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 import Pay from '../components/sections/Pay';
 
-const Home = () => {
+const Home = (props) => {
 
   return (
     <>
-    <Pay className="illustration-section-01"/>
+    <Pay {...props} className="illustration-section-01"/>
     </>
   );
 }

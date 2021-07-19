@@ -31,6 +31,10 @@ import profile2 from './views/Profile2'
 import approval from './views/approval'
 import require_amt from './views/require_amt'
 import payment_history from './views/payment_history'
+import CreateNewPass from './components/sections/CreateNewPass';
+import ForgetPass from './components/sections/ForgetPass';
+import AboutUs from './views/About_us'
+
 
 
 // Initialize Google Analytics
@@ -81,6 +85,13 @@ const App = () => {
           <AppRoute exact path="/Dashboard1_Student" component={Dash1Student} layout={LayoutStudent} />
           <AppRoute exact path="/Profile/:userId" component={Profile} layout={LayoutDefault}/>
           <AppRoute exact path="/Profile2/:userId" component={profile2} layout={LayoutDefault}/>
+          <AppRoute exact path="/CreateNewPass" component={CreateNewPass} layout={LayoutDefault} />
+          <AppRoute exact path="/ForgetPass" component={ForgetPass} layout={LayoutDefault} />
+          <AppRoute exact path="/About_us" component={AboutUs} layout={LayoutDefault} />
+          <AppRoute exact path="/Terms/:userId" component={Terms} layout={LayoutDonor}/>
+          <AppRoute exact path="/Declaration/:userId" component={Declaration} layout={LayoutDonor}/>
+          <AppRoute exact path="/Pay/:userId" component={Pay} layout={LayoutDonor} />
+          <AppRoute exact path="/Feed_Donor/:pgno" component={FeedDonor} layout={LayoutDefault} />
         </Switch>
       )} />
   );

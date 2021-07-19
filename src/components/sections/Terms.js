@@ -71,6 +71,12 @@ const FeaturesSplit = ({
     title: "",
     paragraph: "",
   };
+
+  const getid = () => {
+    const arr = props.location.pathname.split("/");
+    return arr[2];
+  };
+  const [studentid, setStudentId] = useState(getid());
   // alert("Login to Schedule a Meeting!")
   return (
     <section {...props} className={outerClasses}>
@@ -334,7 +340,7 @@ const FeaturesSplit = ({
             </p>
             <br />
             <a
-              href="/Declaration"
+              href={"/Declaration/"+studentid}
               className="button button-primary button-wide-mobile button-sm"
               style={{
                 backgroundColor: "#f1b12a",
@@ -345,7 +351,7 @@ const FeaturesSplit = ({
               Accept
             </a>
             <a
-              href="/Profile"
+              href={"/Profile/"+studentid}
               className="button button-primary button-wide-mobile button-sm"
               style={{
                 backgroundColor: "#f1b12a",

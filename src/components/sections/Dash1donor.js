@@ -146,7 +146,7 @@ else{
                 <p className="m-0">
                   <div className="row">
                       <div className="column">
-                        <a href="#" style={{textDecoration:"none", color:"black", marginRight:"3%"}}>eDOPTED</a>  2
+                        <a href="#" style={{textDecoration:"none", color:"black", marginRight:"3%"}}>eDOPTED</a>  {donorStudents.length}
                       </div>
                       <div className="column">
                       <Link to="/Dashboard2_Donor" className="button button-primary button-wide-mobile button-sm" onClick="" style={{backgroundColor:"#f1b12a"}}>Show More</Link>
@@ -158,6 +158,7 @@ else{
                       {index+1}. {student.name}
                   </div>)
                   })}
+                  <center>{!donorStudents.length?<p>NO STUDENTS YET</p>:''}</center>
                   <br/>
                   <a href="/Feed_Donor" style={{color:"#f1b12a", fontSize:"14px"}}>Adopt More</a>
                 </p>

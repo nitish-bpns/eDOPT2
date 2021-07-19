@@ -1,8 +1,45 @@
 import React from 'react'
 import './style.css'
+import {useState, useEffect,useContext} from 'react';
+import axios from "../../api/axios";
+import { update } from 'lodash';
 
 
-export default function require_amt() {
+const  Require_amt=(props)=> {
+    
+
+    const [amount,setAmount]=useState('')
+    const [list,setList]=useState([])
+    useEffect(()=>{
+        axios.get('/getamountlist',{
+            withCredentials:true
+        })
+       .then((res)=>{
+            console.log(res.data)
+            setList(res.data.data)
+            setAmount(res.data.amountleft)
+        }).catch((err)=>{
+            console.log('err')
+        })
+    },[])
+
+    const updatehandler=(e)=>{
+        e.preventDefault()
+        const index=e.target.value
+        axios.get('/setamount',{
+            params:{
+                'donoremail':list[index].donoremail,
+                'studentid':list[index].studentid,
+                'amount':document.getElementById(index).value
+            }
+        }).then((res)=>{
+            console.log(res.data)
+            window.location.reload();
+        })
+    }
+    
+
+    
     return (
         
         <div style= {{overflowX: "auto"}}>
@@ -15,6 +52,7 @@ export default function require_amt() {
             <th colspan="3">Student</th> 
             <th colspan="3">Donor</th>
             <th colspan="2" rowSpan= "2">Amount Required</th> 
+            <th colspan="1" rowSpan="2">total amount paid</th>
             
         </tr> 
         <tr> 
@@ -27,49 +65,33 @@ export default function require_amt() {
             
 
         </tr> 
+        {list.length?list.map((item,index)=>{
+        return(
         <tr> 
-            <td>Yash</td> 
-            <td>852548</td> 
-            <td>hbsv@gmail.com</td> 
-            <td>Yogesh</td> 
-            <td>77548</td> 
-            <td>yogesh@gmail.com</td> 
-            <td>
-             <input type="text" name="amount-rqrd" placeholder="Enter amount" read-write style= {{border: "none"}}/>
-            </td>
-            <th>
-            <a href="/" style={{backgroundColor:"green", margin:"1%", borderRadius:"20px", padding: "2px 5px"}}>Update</a>
-            </th>
-        </tr><tr> 
-            <td>Yash</td> 
-            <td>852548</td> 
-            <td>hbsv@gmail.com</td> 
-            <td>Yogesh</td> 
-            <td>77548</td> 
-            <td>yogesh@gmail.com</td> 
-            <td>
-             <input type="text" name="amount-rqrd" placeholder="Enter amount" read-write style= {{border: "none"}}/>
-            </td>
-            <th>
-            <a href="/" style={{backgroundColor:"green", margin:"1%", borderRadius:"20px", padding: "2px 5px"}}>Update</a>
-            </th>
-        </tr><tr> 
-            <td>Yash</td> 
-            <td>852548</td> 
-            <td>hbsv@gmail.com</td> 
-            <td>Yogesh</td> 
-            <td>77548</td> 
-            <td>yogesh@gmail.com</td> 
-            <td>
-             <input type="text" name="amount-rqrd" placeholder="Enter amount" read-write style= {{border: "none"}}/>
-            </td>
-            <th>
-            <a href="/" style={{backgroundColor:"green", margin:"1%", borderRadius:"20px", padding: "2px 5px"}}>Update</a>
-            </th>
-        </tr>
+        <td>{item.studentname}</td> 
+        <td>{item.studentid}</td> 
+        <td>{item.studentemail}</td> 
+        <td>{item.donorname}</td> 
+        <td>NA</td> 
+        <td>{item.donoremail}</td> 
+        <td>
+         <input id={index}  type="text" name="amount-rqrd" placeholder={item.amountleft} read-write style= {{border: "none"}}/>
+        </td>
+        <th>
+        <button value={index} onClick={updatehandler}  style={{backgroundColor:"green", margin:"1%", borderRadius:"20px", padding: "2px 5px"}}>Update</button>
+        </th>
+        <td>{item.amountpaid?item.amountpaid:0}</td>
+    </tr>
+        )    
+})
+    :<p>NO entries yet!</p>}
+        
+        
+       
 
         </tbody>
       </table>
         </div>
     )
 }
+export default Require_amt

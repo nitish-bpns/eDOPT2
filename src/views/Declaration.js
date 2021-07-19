@@ -7,11 +7,11 @@ import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 import Declaration from '../components/sections/Declaration';
 
-const Home = () => {
+const Home = (props) => {
 
   return (
     <>
-    <Declaration className="illustration-section-01"/>
+    <Declaration {...props} className="illustration-section-01"/>
     </>
   );
 }

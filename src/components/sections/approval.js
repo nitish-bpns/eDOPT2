@@ -66,7 +66,8 @@ const Approval=()=> {
             <th colspan="3">Student</th> 
             <th colspan="3">Donor</th> 
             <th colspan="1" rowSpan= "2">Approve/Deny</th>
-            <th colSpan="2" rowSpan="2">Status</th>
+            <th colSpan="1" rowSpan="2">Status</th>
+            <th colSpan="2" rowSpan="2">Meeting</th>
         </tr> 
         <tr> 
             <th className= "student-name">Name</th> 
@@ -92,6 +93,7 @@ const Approval=()=> {
             <button onClick={denyhandler} value={index} style={{backgroundColor:"red", margin:"1%", borderRadius:"20px", padding:"2px 5px"}}>Deny</button>
             </td>
             <td>{item.status}</td>
+            <td>{item.meetingtime}  {item.meetingdate}</td>
         </tr>
             )
         })}

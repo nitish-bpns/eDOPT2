@@ -85,14 +85,27 @@ const FeaturesSplit = ({
     title: '',
     paragraph: '-'
   };
+  
+  const pagefun=()=>{
+    try{
+      var x=props.location.pathname.split("/")
+      //console.log(x)
+      return x[2]
+    }
+    catch{
 
+      return 1
+    }
+  }
+  const [page,setpage]=useState(pagefun())
+  
   const [studentList, setStudentList] = useState([])
   const [citySearch, setCitySearch] = useState([])
   
     useEffect(() => {
         axios.get('/donorFeed', {
             params:{
-                pageNo:1,
+                pageNo:page,
                 size:6
             }
         }).then((response)=>{
@@ -131,6 +144,8 @@ const FeaturesSplit = ({
           search()
       }
   }
+
+
 
 
 
@@ -200,7 +215,7 @@ const FeaturesSplit = ({
             </div>
         </div>}
 
-
+            <button></button>
 
     
 
@@ -234,7 +249,7 @@ const FeaturesSplit = ({
               
               }
                 
-                
+                   
           
                 {/* <div>
                 <center>

@@ -7,11 +7,11 @@ import Testimonial from '../components/sections/Testimonial';
 import Cta from '../components/sections/Cta';
 import Feed from '../components/sections/Feeddonor';
 
-const Home = () => {
+const Home = (props) => {
 
   return (
     <>
-    <Feed className="illustration-section-01"/>
+    <Feed {...props} className="illustration-section-01"/>
     </>
   );
 }
