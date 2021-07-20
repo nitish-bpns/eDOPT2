@@ -188,7 +188,7 @@ const FeaturesSplit = ({
                     {student.intro?student.intro:"No introduction provided!"}
                   </p>
                   <center>
-                      <a href={"/Profile/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
+                      <a href={"/Profile1/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
                   </center>
                 </div>
                 <div className={
@@ -233,7 +233,7 @@ const FeaturesSplit = ({
                   style={{width:"50%"}}
                 />
                 <p style={{fontSize:"14px", marginTop:"2%"}}>{student.name}<br/>Age: {student.age}<br/>City: {student.city}<br/></p>
-                <a href={"/Profile/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
+                <a href={"/Profile1/"+student._id} className="button button-primary button-wide-mobile button-sm" style={{backgroundColor:"#f1b12a", borderRadius:"20px", marginTop:"2%"}}>Read More</a>
                 </center>
                 </div>
 

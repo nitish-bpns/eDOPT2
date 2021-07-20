@@ -1,3 +1,94 @@
+.nav-links,
+.logo-image {
+  width: 40%;
+  display: inline-block;
+}
+
+.nav-links {
+  align-items: center;
+  margin-left: 170px;
+}
+
+.admin-nav {
+  width: 260px;
+}
+
+.nav-head {
+  margin-left: 57px;
+}
+
+/*mobile video start*/
+
+.step-img {
+  height: 665px;
+}
+
+.mobile-video {
+  display: block;
+}
+.steps-text,
+.steps-video {
+  display: inline-block;
+}
+
+.steps-text {
+  float: left;
+  width: 50%;
+}
+.steps-video {
+  width: 50%;
+}
+
+.mobile-body {
+  max-width: 326px;
+  height: 665px;
+  border: 1px solid rgba(89, 95, 39, 0.278431);
+  border-radius: 30px;
+  -webkit-box-shadow: 0 0 30px 4px rgb(185 17 65 / 13%);
+  box-shadow: 0 0 30px 4px rgb(185 17 65 / 13%);
+  margin: 20px auto 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.mobile-body .mobile-header {
+  width: 100%;
+  height: 40px;
+  background: #6d6d6d;
+}
+
+.mobile-body {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.mobile-body .mobile-screen {
+  width: 100%;
+  height: 515px;
+  background: #fff;
+  position: relative;
+  text-align: center;
+}
+
+.mobile-body .mobile-footer {
+  width: 100%;
+  height: 44px;
+  background: #6d6d6d;
+  position: absolute;
+  bottom: 0;
+  text-align: center;
+}
+
+.mobile-body .mobile-footer .mobile-footer-button {
+  display: inline-block;
+  border: 1px solid #313131;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-top: 22px;
+}
+/*mobile video end*/
+
 .column {
   float: left;
   width: 50%;
@@ -197,5 +288,19 @@ p {
   }
   .schedule-meet-btn {
     width: 84%;
+  }
+
+  .mobile-body {
+    height: 287px;
+  }
+  .mobile-header {
+    height: 25px;
+  }
+  .mobile-footer {
+    height: 25px;
+  }
+
+  .step-img {
+    height: 228px;
   }
 }

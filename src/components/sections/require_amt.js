@@ -3,11 +3,11 @@ import './style.css'
 import {useState, useEffect,useContext} from 'react';
 import axios from "../../api/axios";
 import { update } from 'lodash';
-
+import { Link, Redirect } from "react-router-dom";
 
 const  Require_amt=(props)=> {
     
-
+    const [redirect,setRedirect]=useState(false)
     const [amount,setAmount]=useState('')
     const [list,setList]=useState([])
     useEffect(()=>{
@@ -19,7 +19,7 @@ const  Require_amt=(props)=> {
             setList(res.data.data)
             setAmount(res.data.amountleft)
         }).catch((err)=>{
-            console.log('err')
+            setRedirect(true)
         })
     },[])
 
@@ -31,15 +31,18 @@ const  Require_amt=(props)=> {
                 'donoremail':list[index].donoremail,
                 'studentid':list[index].studentid,
                 'amount':document.getElementById(index).value
-            }
+            },withCredentials:true
         }).then((res)=>{
             console.log(res.data)
             window.location.reload();
         })
     }
     
+    if (redirect){
+        return(<Redirect to={{pathname:"/AdminLogin",state:{}}} />)
+    }
 
-    
+    else{
     return (
         
         <div style= {{overflowX: "auto"}}>
@@ -93,5 +96,6 @@ const  Require_amt=(props)=> {
       </table>
         </div>
     )
+}
 }
 export default Require_amt

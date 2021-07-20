@@ -209,7 +209,7 @@ const FeaturesSplit = ({
       <Redirect
         to={{
           pathname: "/Login_Donor",
-          state: { redirect: props.location.pathname, studentid: studentid },
+          state: { redirect: "profile/"+studentid, studentid: studentid },
         }}
       />
     );

@@ -222,7 +222,7 @@ const FeaturesSplit = ({
                          </Input> 
                         </div>
                         <div className="column" style={{ paddingRight: "1%" }}>
-                        <Input id="newsletter" type="name" hasIcon="right" placeholder="confirm Password" name="confirmpassword" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}
+                        <Input id="newsletter" type="password" hasIcon="right" placeholder="confirm Password" name="confirmpassword" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}
                         onChange={passwordvalidate} value={confirmp}>
                          </Input> 
                         </div>

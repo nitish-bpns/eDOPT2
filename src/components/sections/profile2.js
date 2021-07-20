@@ -248,6 +248,7 @@ const FeaturesSplit = ({
                             height="240"
                             controls
                             autoPlay
+                            preload="none"
                           >
                             <source
                               src="https://media.w3.org/2010/05/sintel/trailer_hd.mp4"

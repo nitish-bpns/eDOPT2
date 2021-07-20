@@ -7,7 +7,7 @@ import { Link,Redirect } from 'react-router-dom';
 
 const Approval=()=> {
     
-    
+    const [redirect,setRedirect]=useState(false)
     const [approvals,Setapprovals]=useState([])
     useEffect(() => {
         axios.get('/admin/getapprovel', {
@@ -17,6 +17,8 @@ const Approval=()=> {
         }).then((response) => {
                 console.log(response.data)
                 Setapprovals(response.data.data)
+            }).catch((err)=>{
+                setRedirect(true)
             })
         },[])
     
@@ -32,7 +34,7 @@ const Approval=()=> {
                 'studentid':approvals[index].studentid,
                 'donoremail':approvals[index].donoremail,
                 'action':'approve'
-            }
+            },withCredentials:true
             
         }).then((response)=>{
             console.log(response.data)
@@ -48,13 +50,16 @@ const Approval=()=> {
                 'studentid':approvals[index].studentid,
                 'donoremail':approvals[index].donoremail,
                 'action':'deny'
-            }
+            },withCredentials:true
             }).then((response)=>{
                 console.log(response.data)
                 window.location.reload();
         })
     }
-    
+    if (redirect){
+        return(<Redirect to={{pathname:"/AdminLogin",state:{}}} />)
+      }
+    else{  
     return (
         <div style= {{overflowX: "auto"}}>
         <center>
@@ -105,6 +110,6 @@ const Approval=()=> {
         </div>
     );
 }
-
+}
 
 export default Approval

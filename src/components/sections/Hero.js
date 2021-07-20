@@ -64,7 +64,6 @@ const responsive = {
   },
 };
 
-
 const propTypes = {
   ...SectionProps.types,
 };
@@ -186,11 +185,11 @@ const Hero = ({
           </div>
         </div>
         <br />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <img src={require("./../../assets/images/ss.png")} alt="" />
         <br />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <center>
           <ButtonGroup>
             <Button
@@ -205,8 +204,8 @@ const Hero = ({
           </ButtonGroup>
         </center>
         <br />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -280,12 +279,32 @@ const Hero = ({
             </div>
           </div>
         </div>
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
-        <img src={require("./../../assets/images/ss1.png")} alt="" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        {/*<img src={require("./../../assets/images/ss1.png")} alt="" />
         <br />
-        <br className= "remove-in-mobile" />
+                <br className= "remove-in-mobile" />*/}
+
+        {/* steps video start */}
+        <img
+          src={require("./../../assets/images/steps.png")}
+          alt=""
+          style={{ width: "73%" }}
+        />
+        <div className="mobile-video">
+          <div className="steps-text">
+            <img src={require("./../../assets/images/steps-text.png")} alt="" />
+          </div>
+          <div className="steps-video">
+            <div className="mobile-body">
+              <div className="mobile-header"></div>
+              <div className="mobile-screen"></div>
+              <div className="mobile-footer"></div>
+            </div>
+          </div>
+        </div>
+        {/* steps video end */}
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -356,8 +375,8 @@ const Hero = ({
             </div>
           </div>
         </div>
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <center>
           <ButtonGroup>
             <Button
@@ -390,14 +409,14 @@ const Hero = ({
           </ButtonGroup>
         </center>
         <br />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <img src="s5.png" alt="" style={{ width: "40%" }} />
         <br />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <Carousel responsive={responsive} style={{ alignItems: "center" }}>
-          <Card style={{marginRight:"0.4%", border:"none"}}>
-            <CardHeader style={{ padding: "0px 0 5px 0", margin:"1%" }}>
+          <Card style={{ marginRight: "0.4%", border: "none" }}>
+            <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
               <img src="s6.png" alt="" />
             </CardHeader>
             <CardBody
@@ -405,7 +424,7 @@ const Hero = ({
                 textAlign: "left",
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
-                margin:"1%"
+                margin: "1%",
               }}
             >
               <b style={{ fontSize: "18px" }}>
@@ -415,7 +434,7 @@ const Hero = ({
               A bright student rahul from chattisgarg lost only earning member
               of his family to covid this march 2020
               <br />
-              <br className= "remove-in-mobile" />
+              <br className="remove-in-mobile" />
               <center>
                 <Button
                   tag="a"
@@ -429,8 +448,10 @@ const Hero = ({
               </center>
             </CardBody>
           </Card>
-          <Card style={{marginLeft:"0.4%", marginRight:"0.4%", border:"none"}}>
-            <CardHeader style={{ padding: "0px 0 5px 0", margin:"1%" }}>
+          <Card
+            style={{ marginLeft: "0.4%", marginRight: "0.4%", border: "none" }}
+          >
+            <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
               <img src="s6.png" alt="" />
             </CardHeader>
             <CardBody
@@ -438,7 +459,7 @@ const Hero = ({
                 textAlign: "left",
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
-                margin:"1%"
+                margin: "1%",
               }}
             >
               <b style={{ fontSize: "18px" }}>
@@ -448,7 +469,7 @@ const Hero = ({
               A bright student rahul from chattisgarg lost only earning member
               of his family to covid this march 2020
               <br />
-              <br className= "remove-in-mobile" />
+              <br className="remove-in-mobile" />
               <center>
                 <Button
                   tag="a"
@@ -462,8 +483,8 @@ const Hero = ({
               </center>
             </CardBody>
           </Card>
-          <Card style={{marginLeft:"0.4%", border:"none"}}>
-            <CardHeader style={{ padding: "0px 0 5px 0", margin:"1%" }}>
+          <Card style={{ marginLeft: "0.4%", border: "none" }}>
+            <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
               <img src="s6.png" alt="" />
             </CardHeader>
             <CardBody
@@ -471,7 +492,7 @@ const Hero = ({
                 textAlign: "left",
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
-                margin:"1%"
+                margin: "1%",
               }}
             >
               <b style={{ fontSize: "18px" }}>
@@ -481,7 +502,7 @@ const Hero = ({
               A bright student rahul from chattisgarg lost only earning member
               of his family to covid this march 2020
               <br />
-              <br className= "remove-in-mobile" />
+              <br className="remove-in-mobile" />
               <center>
                 <Button
                   tag="a"
@@ -497,8 +518,8 @@ const Hero = ({
           </Card>
         </Carousel>
         <br />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         {/*}
         <img src="s4.png" alt="" style={{ width: "50%" }} />
         <br />
@@ -607,8 +628,8 @@ const Hero = ({
           </div>
         </div>
         <br />
-        <br className= "remove-in-mobile" />
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" />
         {/*
         <center>
           <h4 style={{ color: "black" }}>Featured In</h4>
@@ -648,7 +669,7 @@ const Hero = ({
           </div>
         </Carousel>
         <br /> */}
-        <br className= "remove-in-mobile" />
+        <br className="remove-in-mobile" />
         <b style={{ color: "black" }}>
           Have a question? chat with us on Whatsapp
         </b>
@@ -669,7 +690,6 @@ const Hero = ({
         <br />
         <br />
       </div>
-
     </section>
   );
 };
