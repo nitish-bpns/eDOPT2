@@ -319,6 +319,7 @@ const Header = ({
   },[]);
   const [redirecthome,setRedirectHome]=useState(false)
   const logouthandler=(e)=>{
+    document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     axios.get('/logout',{withCredentials:true})
     .then((response)=>{
       setRedirectHome(true)
