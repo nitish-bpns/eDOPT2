@@ -113,7 +113,7 @@ useEffect(() => {
               setDonorStudents(response.data)
           }).catch((err)=>{
             setRedirectHome(true)
-          console.log('error')
+          console.log(err)
           }) 
       }
       else{
