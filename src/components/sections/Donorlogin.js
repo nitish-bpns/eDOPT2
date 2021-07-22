@@ -78,6 +78,12 @@ const FeaturesSplit = ({
     }
   };
 
+  const createCookieInHour =(cookieName, cookieValue, hourToExpire) => {
+    let date = new Date();
+    date.setTime(date.getTime()+(hourToExpire*60*60*1000));
+    document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
+}
+
   const [state, setState] = useState(stateredirect());
 
   const handleuser = (e) => {
@@ -104,6 +110,7 @@ const FeaturesSplit = ({
         //console.log('success')
         //console.log(response)
         if (response.data.status) {
+          createCookieInHour('email',response.data.email,120)
           if (response.data.redirect != "undefined") {
             setRedirectPath(response.data.redirect);
           }

@@ -66,7 +66,11 @@ const FeaturesSplit = ({
     const [password, setPassword] = useState('');
     const [redirect,setRedirect] = useState('');
     //const [token, setToken] = useState({});
-    
+    const createCookieInHour =(cookieName, cookieValue, hourToExpire) => {
+      let date = new Date();
+      date.setTime(date.getTime()+(hourToExpire*60*60*1000));
+      document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
+  }
     const studentLoginHandler = (e)=>{
         e.preventDefault()
         if (!username){
@@ -80,6 +84,7 @@ const FeaturesSplit = ({
         }).then((response)=>{
             //console.log(response.data)
             if (response.data.status){
+            createCookieInHour('email',response.data.email,120)
             setRedirect(true)}
             else{alert(response.data.messege)}
         })

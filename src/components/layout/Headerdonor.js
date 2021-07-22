@@ -89,10 +89,10 @@ const Header = ({
     })
   }  
 
-  //if (redirecthome){
-   // return(<Redirect to={{pathname:"/Login_Donor",state:{}}} />)
-  //}
-  //else{
+  if (redirecthome){
+    return(<Redirect to={{pathname:"/Login_Donor",state:{}}} />)
+  }
+  else{
 
   return (
     <header
@@ -156,7 +156,7 @@ const Header = ({
       </div>
     </header>
   );
-//}
+}
 }
 Header.propTypes = propTypes;
 Header.defaultProps = defaultProps;

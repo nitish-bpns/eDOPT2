@@ -63,6 +63,12 @@ const FeaturesSplit = ({
   const [password,Setpassword]=useState('')
   const [redirecthome,setRedirectHome]=useState(false)
 
+  const createCookieInHour =(cookieName, cookieValue, hourToExpire) => {
+    let date = new Date();
+    date.setTime(date.getTime()+(hourToExpire*60*60*1000));
+    document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
+}
+
   const loginhandler=(e)=>{
     e.preventDefault()
     axios.get('/admin/login',{
@@ -74,6 +80,7 @@ const FeaturesSplit = ({
     }).then((res)=>{
       //console.log(res.data)
       if (res.data.status){
+        createCookieInHour('email',res.data.email,120)
         setRedirectHome(true)
       }
       else{
