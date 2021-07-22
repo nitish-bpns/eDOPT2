@@ -79,11 +79,14 @@ const FeaturesSplit = ({
 
   const [cumulativeMarks, setCumulativeMarks] = useState([]);
   const [percentageMarks, setPercentageMarks] = useState([]);
-  const [userToken,setUserToken]=useState('')
+  const [userToken,setUserToken]=useState({})
   const [redirecthome,setRedirectHome]=useState(false)
   const [is_adopted,setis_adopted]=useState(false)
   const [donor,setDonor]=useState({})
 
+  const [loaded,setLoaded]=useState(false)
+
+  
 
   useEffect(() => {
     //console.log(Token)
@@ -94,7 +97,7 @@ const FeaturesSplit = ({
     })
         .then(response => {
           
-            console.log(response.data)
+            //console.log(response.data)
             let cumulative_marksheet = []
             let percentage_marksheet = []
             let total_marks = 0;
@@ -113,8 +116,8 @@ const FeaturesSplit = ({
             for (let k=1; k < cumulative_marksheet.length+1; k++){
                 percentage_marksheet[k] = [cumulative_marksheet[k-1][0], (cumulative_marksheet[k-1][1]/total_marks)*100]
             }
-            console.log(percentage_marksheet)
-            console.log(cumulative_marksheet)
+            //console.log(percentage_marksheet)
+            //console.log(cumulative_marksheet)
             setCumulativeMarks(cumulative_marksheet)
             setPercentageMarks(percentage_marksheet)
         })
@@ -130,9 +133,10 @@ useEffect(() => {
         email : email
       },withCredentials:true
   }).then((response) => {
-          console.log(response.data)
+          //console.log(response.data)
           setUserToken(response.data)
-          console.log(response.data.is_adopted)
+          setLoaded(true)
+          //console.log(response.data.is_adopted)
           if (response.data.is_adopted){
             axios.get('/getmydonor',{
               headers:{
@@ -141,7 +145,7 @@ useEffect(() => {
                 studentid:response.data.id
               },withCredentials:true
             }).then((response)=>{
-              console.log(response.data)
+              //console.log(response.data)
               setis_adopted(true)
               setDonor(response.data.donordata)
             })
@@ -168,6 +172,21 @@ const [selectedFile, setSelectedFile] = useState(null);
             })
     }
 
+    function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+  };
+  
+    const photo=()=>{
+        //console.log(userToken)
+        let x = userToken.photo.data.data
+        var base64Flag = 'data:image/jpeg;base64,';
+        var imageStr = arrayBufferToBase64(x);
+        return(base64Flag + imageStr)
+  
+    }
+
+
 if (redirecthome){
   return(<Redirect to={{pathname:"/Login_Student",state:{}}} />)
 }
@@ -191,7 +210,7 @@ else{
                         <div className="row"> 
                                 <div className="column" style={{padding:"1% 1% 1% 0%"}}>
                                     <center>
-                                    <img src={userToken.photo} alt="" style={{width:"70%"}}/>
+                                    <img src={loaded?photo():""} alt="" style={{width:"70%"}}/>
                                     </center>
                                     <p className="text-sm mb-0" style={{textAlign:"center", fontSize:"14px"}}>
                                       {userToken.name}

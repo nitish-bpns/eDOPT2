@@ -102,7 +102,7 @@ const Verifystud=(props)=> {
             <td>
               <a
                 href={"/StudentUpdate/"+student._id}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "blue" }}
               >
                 {student.name}
               </a>

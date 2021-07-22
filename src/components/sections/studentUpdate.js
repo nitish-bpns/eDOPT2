@@ -106,7 +106,7 @@ const StudentUpdate=({
   const [verified,setVerified]=useState(true)
   
   const [redirect,setRedirect]=useState(false)
-  
+  const [loaded,setLoaded]=useState(false)
   useEffect(()=>{
     axios.get('/admin/studentdata',{
       headers:{
@@ -114,8 +114,9 @@ const StudentUpdate=({
         'id':studentid
       },withCredentials:true
     }).then((res)=>{
-      console.log(res.data.student)
+      //console.log(res.data.student)
       setStudent(res.data.student)
+      setLoaded(true)
       setStudentName(res.data.student.name)
       setStudentUserName(res.data.student.email)
       setStudentAge(res.data.student.age)
@@ -191,9 +192,10 @@ const StudentUpdate=({
   const passhandler=(e)=>{
     console.log(newpassword)
     axios.get('/admin/changepasswordstd',{headers:{
-      id:studentid,
-      password1:newpassword
+      'id':studentid,
+      'password1':newpassword
     },withCredentials:true}).then((res)=>{
+      console.log(res.data)
       if (res.data.status){
         alert('password changed successfuly')
         window.location.reload()
@@ -203,10 +205,35 @@ const StudentUpdate=({
       }
     }).catch((err)=>{
       console.log(err)
-      alert('something went wrong')
+      alert('something  wrong')
     })
   }
+  const [selectedFile, setSelectedFile] = useState(null);
 
+    const uploadFile = (event) => {
+        setSelectedFile(event.target.files[0])
+        let formData = new FormData();
+        formData.append('file', selectedFile)
+        axios.post('/imageupload', formData,{headers:{id:studentid},withCredentials:true})
+            .then(response => {
+                document.getElementById('loader_message').innerText = "File Successfully Uploaded!"
+            })
+    }
+
+
+    function arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+  };
+  
+    const photo=()=>{
+        //console.log(userToken)
+        let x = student.photo.data.data
+        var base64Flag = 'data:image/jpeg;base64,';
+        var imageStr = arrayBufferToBase64(x);
+        return(base64Flag + imageStr)
+  
+    }
 
   if (redirect){
     return(<Redirect to={{pathname:"/AdminLogin",state:{}}} />)
@@ -217,7 +244,7 @@ else{
       <div className="studentDetails">
         <div className="profile">
           <img
-            src={student.photo}
+            src={loaded?photo():""}
             alt=""
             style={{
               height: "200px",
@@ -469,12 +496,14 @@ height={396} /> */}
           </div>
         </div>
       </form>
-      <form>
-            <Input type="file"></Input>
-            <p id="image">Upload your photo here</p>
-            <button type="submit" className="button button-primary button-wide-mobile button-sm"
-          style={{backgroundColor: "#f1b12a", borderRadius: "20px"}}>upload</button>
-          </form>
+      <div style={{alignItems:"center"}}>
+        <p>Upload Image here</p>
+                              <img src="file.png" alt="" style={{width:"35%", textAlign:"center"}}/>
+                              
+                              <Input type="file" style={{borderRadius:"20px", borderColor:"grey", color:"grey"}}
+                              onChange={(event)=>{uploadFile(event)}}/>
+                               <div id="loader_message" style={selectedFile?{display: 'inline'}:{display: 'none'}}>File is uploading, Please wait...</div>
+                            </div>
 
       <div>
           <input onChange={(e)=>{setNewpassword(e.target.value)}} placeholder="newpassword"></input>

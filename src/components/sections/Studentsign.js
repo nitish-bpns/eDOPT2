@@ -83,7 +83,15 @@ const FeaturesSplit = ({
 
   const signUpStudent = (e)=>{
       e.preventDefault()
-      console.log("Hello")
+      //console.log("Hello")
+      axios.get('/chkusername',{
+        headers:{
+          'username':studentUserName
+        }
+      }).then((res)=>{
+          if (res.data.status){
+            
+          
       axios.post('/registerStudent', {
           name: studentName,
           email: studentUserName,
@@ -127,21 +135,18 @@ const FeaturesSplit = ({
               setGuardianWants('')
               setGuardianNeeds('')
           }).catch(function (error) {
-          console.log(error);
-      });
+          alert('something went wrong ! ')
+      })
+    }
+    else{
+      alert('username already exists')
+    }
+
+  }).catch((err)=>{
+    alert('username already exists')
+  })
   }
-  const handleusername=()=>{
-    
-    //console.log(e.target.value)
-    axios.get('/chkusername',{
-      headers:{
-        'username':studentUserName
-      }
-    }).then((res)=>{
-      if (!res.data.status){
-      console.log(res.data)}
-    })
-  }
+  
 
   return (
     <section

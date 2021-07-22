@@ -115,8 +115,14 @@ const FeaturesSplit = ({
   const [date,setDate]=useState("")
   const [time,setTime]=useState("")
 
-
+  const [image,setImage]=useState("")
   //alert("Login to Schedule a Meeting!")
+  function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+};
+  
+  
   useEffect(() => {
     //setRedirected(checkredirected())
     //if (redirected){
@@ -132,6 +138,16 @@ const FeaturesSplit = ({
         .then((response) => {
           setStudent(response.data.student);
           setFound(true);
+          //console.log(response.data.student.photo)
+          try{
+          let x = response.data.student.photo.data.data
+          var base64Flag = 'data:image/jpeg;base64,';
+          var imageStr = arrayBufferToBase64(x);
+          setImage(base64Flag + imageStr)
+          }
+          catch{
+            setImage("")
+          }
           if (!response.data.status) {
             setRedirectHome(true);
           } else {
@@ -144,7 +160,7 @@ const FeaturesSplit = ({
                   },
                 })
                 .then((response) => {
-                  console.log(response.data);
+                  //console.log(response.data);
                   setRequestStatus(response.data.status);
                   if (response.data.status) {
                     setStatus(response.data.messege);
@@ -159,7 +175,7 @@ const FeaturesSplit = ({
                   withCredentials: true,
                 })
                 .then((response) => {
-                  console.log(response.data);
+                  //console.log(response.data);
                   //console.log(donorToken)
                   setDonorData(response.data);
                   //setToken(donorToken)
@@ -168,11 +184,12 @@ const FeaturesSplit = ({
           }
         })
         .catch((err) => {
-          //console.log('errorsdfgh')
+          //console.log(err)
           setRedirectHome(true);
         });
     } catch (err) {
       //console.log('error')
+      //console.log(err)
       setRedirectHome(true);
     }
   }, []);
@@ -194,7 +211,7 @@ const FeaturesSplit = ({
           withCredentials: true,
         })
         .then((response) => {
-          console.log(response.data);
+          //console.log(response.data);
           alert(response.data.messege);
           window.location.reload();
         });
@@ -231,9 +248,10 @@ const FeaturesSplit = ({
           <div className="main-container">
             <div className="upper-div">
               <div className="profile-img">
+                
                 <img
-                  src={found ? student.photo : ""}
-                  alt=""
+                  src={found ? image : ""}
+                  alt="No images available!!"
                   style={{
                     width: "80%",
                     margin: "5px auto",

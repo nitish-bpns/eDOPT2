@@ -84,7 +84,7 @@ function getCookie(name) {
 }
 const [email,setEmail]=useState(getCookie('email'))
 useEffect(() => {
-    console.log(getCookie('email'))
+    //console.log(getCookie('email'))
     if  (email){
     axios.get('/donorDashboard', {
         headers : {
@@ -109,7 +109,7 @@ useEffect(() => {
             //authorization: donorToken
           },withCredentials:true
       }).then((response) => {
-              console.log(response.data)
+              //console.log(response.data)
               setDonorStudents(response.data)
           }).catch((err)=>{
             setRedirectHome(true)

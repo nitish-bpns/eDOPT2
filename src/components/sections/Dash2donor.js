@@ -89,7 +89,7 @@ const FeaturesSplit = ({
               //authorization: donorToken
           },withCredentials:true
       }).then((response) => {
-              console.log(response.data)
+              //console.log(response.data)
               //console.log(donorToken)
               setDonorData(response.data)
               //setToken(donorToken)
@@ -106,7 +106,7 @@ const FeaturesSplit = ({
               //authorization: donorToken
             },withCredentials:true
         }).then((response) => {
-                console.log(response.data)
+                //console.log(response.data)
                 setDonorStudents(response.data)
             }).catch((err)=>{
               setRedirectHome(true)
@@ -118,7 +118,23 @@ const FeaturesSplit = ({
         }
   }, []);
   
-  
+
+  function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+};
+
+  const photo=(index)=>{
+    try{
+      let x = donorStudents[index].photo.data.data
+      var base64Flag = 'data:image/jpeg;base64,';
+      var imageStr = arrayBufferToBase64(x);
+      return(base64Flag + imageStr)
+    }
+    catch{
+      return("")
+    }
+  }
   
   if (redirecthome){
     return(<Redirect to={{pathname:"/Login_Donor",state:{}}} />)
@@ -144,7 +160,7 @@ const FeaturesSplit = ({
                         <div style={{border:"1px solid #f1b12a", padding:"7%", margin:"4% 0%", borderRadius:"20px", boxShadow: "5px 5px #f1f1f1"}}>
                         <div className="row"> 
                                 <div className="column" style={{padding:"1%"}}>
-                                    <img src={student.photo} alt="" style={{width:"70%"}}/>
+                                    <img  src={photo(index)} alt="" style={{width:"70%"}}/>
                                     <br/>
                                     <p className="text-sm mb-0" style={{textAlign:"left", fontSize:"14px"}}>
                                         {student.name}

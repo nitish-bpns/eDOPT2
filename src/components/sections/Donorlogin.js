@@ -98,8 +98,8 @@ const FeaturesSplit = ({
   }
   const handlelogin=(e)=>{
     e.preventDefault()
-    console.log(userName)
-    console.log(password)
+    //console.log(userName)
+    //console.log(password)
 
   axios.get('/donorLogin',{
     headers:{

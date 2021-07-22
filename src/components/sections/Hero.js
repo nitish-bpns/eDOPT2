@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classNames from "classnames";
 import { SectionProps } from "../../utils/SectionProps";
 import ButtonGroup from "../elements/ButtonGroup";
@@ -13,6 +13,7 @@ import "./style.css";
 import i18n from "i18next";
 import photo from "./../../assets/images/ss2.png";
 import { useTranslation, initReactI18next } from "react-i18next";
+import axios from "../../api/axios";
 
 const URL = "./../../assets/images/ss2.png";
 
@@ -126,6 +127,32 @@ const Hero = ({
     title: "",
     paragraph: "",
   };
+  const [loaded,setloaded]=useState(false)
+  const [students,setStudents]=useState({})
+  useEffect(()=>{
+    axios.get('/featured')
+    .then((res)=>{
+      setStudents(res.data)
+      setloaded(true)
+      console.log(res.data)
+    })
+  },[])
+
+  function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+};
+
+  const photo=(key)=>{
+    try {
+      let x = students[key].photo.data.data
+      var base64Flag = 'data:image/jpeg;base64,';
+      var imageStr = arrayBufferToBase64(x);
+      return(base64Flag + imageStr)
+    } catch (error) {
+      return("")
+    }
+  }
 
   return (
     <section {...props} className={outerClasses}>
@@ -417,7 +444,7 @@ const Hero = ({
         <Carousel responsive={responsive} style={{ alignItems: "center" }}>
           <Card style={{ marginRight: "0.4%", border: "none" }}>
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src="s6.png" alt="" />
+              <img src={loaded?photo('st1'):""} alt="" />
             </CardHeader>
             <CardBody
               style={{
@@ -440,10 +467,10 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href="/Signup_Donor"
+                  href={loaded?"/Profile1/"+students.st1._id:""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT RAHUL
+                  eDOPT {loaded?students.st1.name:""}
                 </Button>
               </center>
             </CardBody>
@@ -452,7 +479,7 @@ const Hero = ({
             style={{ marginLeft: "0.4%", marginRight: "0.4%", border: "none" }}
           >
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src="s6.png" alt="" />
+              <img src={loaded?photo('st2'):""}alt="" />
             </CardHeader>
             <CardBody
               style={{
@@ -475,17 +502,17 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href="/Signup_Donor"
+                  href={loaded?"/Profile1/"+students.st1._id:""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT RAHUL
+                  eDOPT {loaded?students.st2.name:""}
                 </Button>
               </center>
             </CardBody>
           </Card>
           <Card style={{ marginLeft: "0.4%", border: "none" }}>
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src="s6.png" alt="" />
+              <img src={loaded?photo('st3'):""}alt="" />
             </CardHeader>
             <CardBody
               style={{
@@ -508,10 +535,10 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href="/Signup_Donor"
+                  href={loaded?"/Profile1/"+students.st3._id:""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT RAHUL
+                  eDOPT {loaded?students.st3.name:""}
                 </Button>
               </center>
             </CardBody>

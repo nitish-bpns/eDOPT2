@@ -98,7 +98,7 @@ const FeaturesSplit = ({
             email:props.location.state.semail,
         },withCredentials:true
     }).then((response) => {
-            console.log(response.data)
+            //console.log(response.data)
             //console.log(index)
             //console.log(student)
             setStudentMarklist(response.data)
@@ -123,8 +123,8 @@ const FeaturesSplit = ({
                     percentage_marksheet[k] = [cumulative_marksheet[k-1][0], (cumulative_marksheet[k-1][1]/total_marks)*100]
                 }
                 //console.log(total_marks)
-                console.log(percentage_marksheet)
-                console.log(cumulative_marksheet)
+                //console.log(percentage_marksheet)
+                //console.log(cumulative_marksheet)
                 setCumulativeMarks(cumulative_marksheet)
                 setPercentageMarks(percentage_marksheet)
             

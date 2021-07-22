@@ -123,8 +123,8 @@ const Testimonial = ({
                     percentage_marksheet[k] = [cumulative_marksheet[k-1][0], (cumulative_marksheet[k-1][1]/total_marks)*100]
                 }
                 //console.log(total_marks)
-                console.log(percentage_marksheet)
-                console.log(cumulative_marksheet)
+               //console.log(percentage_marksheet)
+                //console.log(cumulative_marksheet)
                 setCumulativeMarks(cumulative_marksheet)
                 setPercentageMarks(percentage_marksheet)
             
@@ -137,7 +137,7 @@ const Testimonial = ({
         }
         catch (error) {
             setRedirectHome(true)
-            console.log(error)
+            //console.log(error)
         }  
        
 

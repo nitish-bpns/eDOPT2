@@ -15,7 +15,7 @@ const  Require_amt=(props)=> {
             withCredentials:true
         })
        .then((res)=>{
-            console.log(res.data)
+            //console.log(res.data)
             setList(res.data.data)
             setAmount(res.data.amountleft)
         }).catch((err)=>{
@@ -33,7 +33,7 @@ const  Require_amt=(props)=> {
                 'amount':document.getElementById(index).value
             },withCredentials:true
         }).then((res)=>{
-            console.log(res.data)
+            //console.log(res.data)
             window.location.reload();
         })
     }

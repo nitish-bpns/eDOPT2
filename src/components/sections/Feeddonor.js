@@ -101,7 +101,7 @@ const FeaturesSplit = ({
   
   const [studentList, setStudentList] = useState([])
   const [citySearch, setCitySearch] = useState([])
-  
+  const [loaded,setLoaded]=useState(false)
     useEffect(() => {
         axios.get('/donorFeed', {
             params:{
@@ -114,6 +114,7 @@ const FeaturesSplit = ({
                 alert(response.data.message)
             }else{
                 setStudentList(response.data.message)
+                setLoaded(true)
             }
         })
     }, []);
@@ -132,7 +133,8 @@ const FeaturesSplit = ({
                 alert(response.data.message)
             }else{
                 setStudentList(response.data.message)
-                console.log(response.data)
+                setLoaded(true)
+                //console.log(response.data)
                 setCitySearch('')
             }
         })
@@ -145,7 +147,23 @@ const FeaturesSplit = ({
       }
   }
 
+  function arrayBufferToBase64(buffer) {
+    var binary = '';
+    var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
+};
 
+  const photo=(index)=>{
+    try {
+      let x = studentList[index].photo.data.data
+      var base64Flag = 'data:image/jpeg;base64,';
+      var imageStr = arrayBufferToBase64(x);
+      return(base64Flag + imageStr)
+    } catch (error) {
+      return("")
+    }
+      
+
+  }
 
 
 
@@ -198,7 +216,7 @@ const FeaturesSplit = ({
                   )}
                   data-reveal-container=".split-item">
                   <Image
-                    src={student.photo}
+                    src={loaded?photo(index):""}
                     alt="Features split 01"
                     style={{width:"60%"}} />
                 </div>
@@ -228,7 +246,7 @@ const FeaturesSplit = ({
                     <div>
                 <center>
                 <Image
-                  src={student.photo}
+                  src={loaded?photo(index):""}
                   alt="Features split 03"
                   style={{width:"50%"}}
                 />

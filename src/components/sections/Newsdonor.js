@@ -94,7 +94,7 @@ const FeaturesSplit = ({
                 size:3
             }
         }).then( (response) => {
-            console.log(response.data)
+            //console.log(response.data)
             if (response.data.error){
                 alert(response.data.message)
             }else{

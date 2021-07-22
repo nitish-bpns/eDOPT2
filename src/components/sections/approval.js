@@ -15,7 +15,7 @@ const Approval=()=> {
                 nothing:'nothing'
             },withCredentials:true
         }).then((response) => {
-                console.log(response.data)
+                //console.log(response.data)
                 Setapprovals(response.data.data)
             }).catch((err)=>{
                 setRedirect(true)
@@ -37,13 +37,13 @@ const Approval=()=> {
             },withCredentials:true
             
         }).then((response)=>{
-            console.log(response.data)
+            //console.log(response.data)
             window.location.reload();
         })
     }
     const denyhandler=(e)=>{
         const index=e.target.value
-        console.log(index)
+        //console.log(index)
         //Action('approve',val)
         axios.get('/admin/approve',{
             params:{
@@ -52,7 +52,7 @@ const Approval=()=> {
                 'action':'deny'
             },withCredentials:true
             }).then((response)=>{
-                console.log(response.data)
+               // console.log(response.data)
                 window.location.reload();
         })
     }
@@ -86,7 +86,7 @@ const Approval=()=> {
             return(
                 <tr> 
         
-            <td>{item.studentname}</td> 
+            <td>href={"/StudentUpdate/"+item.studentid}<a>{item.studentname}</a></td> 
             <td>{item.studentid}</td> 
             <td>{item.studentemail}</td> 
             <td>{item.donorname}</td> 

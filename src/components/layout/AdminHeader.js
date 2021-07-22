@@ -1,11 +1,12 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Link } from "react-router-dom";
+import { Link,Redirect } from "react-router-dom";
 import Logo from "./partials/Logo";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import "./style.css";
+import axios from "../../api/axios";
 
 const propTypes = {
   navPosition: PropTypes.string,
@@ -81,6 +82,19 @@ const AdminHeader = ({
     className
   );
 
+
+  const [redirecthome,setRedirectHome]=useState(false)
+  const logouthandler=(e)=>{
+    axios.get('/logout',{withCredentials:true})
+    .then((response)=>{
+      setRedirectHome(true)
+    })
+  }  
+
+  if (redirecthome){
+    return(<Redirect to={{pathname:"/AdminLogin",state:{}}} />)
+  }
+  else{
   return (
     <header {...props} className={classes}>
       <div className="container">
@@ -134,10 +148,10 @@ const AdminHeader = ({
                         </Link>
                       </li>
                       <li>
-                        <Link
+                        <button
                           to="/AdminLogin"
                           className="button button-primary button-wide-mobile button-sm"
-                          onClick={closeMenu}
+                          onClick={logouthandler}
                           style={{
                             backgroundColor: "#ffffff",
                             borderRadius: "5px",
@@ -146,7 +160,7 @@ const AdminHeader = ({
                           }}
                         >
                           Logout
-                        </Link>
+                        </button>
                       </li>
                     </ul>
                   )}
@@ -159,7 +173,7 @@ const AdminHeader = ({
     </header>
   );
 };
-
+}
 AdminHeader.propTypes = propTypes;
 AdminHeader.defaultProps = defaultProps;
 

@@ -110,7 +110,7 @@ const FeaturesSplit = ({
         'donoremail':email
       }
     }).then((res)=>{
-      console.log(res)
+      //console.log(res)
       if (!res.data.approved){setRedirect(true)}
       
     }).catch((err)=>{

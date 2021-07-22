@@ -22,7 +22,7 @@ const Verifystud=(props)=> {
   const [email,setEmail]=useState(getCookie('email'))
   const [redirecthome,setRedirectHome]=useState(false)
 
-
+  
   const [verifylist,setVerifylis]=useState([])
 
   useEffect(()=>{
@@ -102,7 +102,7 @@ const Verifystud=(props)=> {
             <td>
               <a
                 href={"/StudentUpdate/"+student._id}
-                style={{ textDecoration: "none", color: "black" }}
+                style={{ textDecoration: "none", color: "blue" }}
               >
                 {student.name}
               </a>
