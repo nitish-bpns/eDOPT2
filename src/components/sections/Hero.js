@@ -127,32 +127,33 @@ const Hero = ({
     title: "",
     paragraph: "",
   };
-  const [loaded,setloaded]=useState(false)
-  const [students,setStudents]=useState({})
-  useEffect(()=>{
-    axios.get('/featured')
-    .then((res)=>{
-      setStudents(res.data)
-      setloaded(true)
-      console.log(res.data)
-    })
-  },[])
+  const [loaded, setloaded] = useState(false);
+  const [students, setStudents] = useState({});
+  useEffect(() => {
+    axios.get("/featured").then((res) => {
+      setStudents(res.data);
+      setloaded(true);
+      console.log(res.data);
+    });
+  }, []);
 
   function arrayBufferToBase64(buffer) {
-    var binary = '';
-    var bytes = [].slice.call(new Uint8Array(buffer));    bytes.forEach((b) => binary += String.fromCharCode(b));    return window.btoa(binary);
-};
-
-  const photo=(key)=>{
-    try {
-      let x = students[key].photo.data.data
-      var base64Flag = 'data:image/jpeg;base64,';
-      var imageStr = arrayBufferToBase64(x);
-      return(base64Flag + imageStr)
-    } catch (error) {
-      return("")
-    }
+    var binary = "";
+    var bytes = [].slice.call(new Uint8Array(buffer));
+    bytes.forEach((b) => (binary += String.fromCharCode(b)));
+    return window.btoa(binary);
   }
+
+  const photo = (key) => {
+    try {
+      let x = students[key].photo.data.data;
+      var base64Flag = "data:image/jpeg;base64,";
+      var imageStr = arrayBufferToBase64(x);
+      return base64Flag + imageStr;
+    } catch (error) {
+      return "";
+    }
+  };
 
   return (
     <section {...props} className={outerClasses}>
@@ -208,9 +209,10 @@ const Hero = ({
                 <img src="ss1.png" alt="" style={{ width: "88%" }} />
               </div>
             </div>
-            <img src="ss2.png" alt="" />
+            <img src={require("./../../assets/images/ss2(1).jpg")} alt="" />
           </div>
         </div>
+        <br />
         <br />
         <br className="remove-in-mobile" />
         <br className="remove-in-mobile" />
@@ -265,9 +267,9 @@ const Hero = ({
                       style={{ fontSize: "14px", paddingRight: "3%" }}
                     >
                       <p className="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua!
+                        "If we want to reach real peace in this world, we should
+                        start educating children"
+                        <br />~ Mahatma Gandhi
                       </p>
                     </div>
                     <div
@@ -280,7 +282,7 @@ const Hero = ({
                       }}
                     >
                       <center>
-                        <h4 style={{ color: "black" }}>586+</h4>
+                        <h4 style={{ color: "black" }}>35+</h4>
                         <p className="m-0">
                           Children have registered themselves and cleared
                           adoptation interview to change their lives forever...
@@ -321,7 +323,11 @@ const Hero = ({
         />
         <div className="mobile-video">
           <div className="steps-text">
-            <img src={require("./../../assets/images/steps-text.png")} alt="" />
+            <img
+              className="step-img"
+              src={require("./../../assets/images/steps-text.png")}
+              alt=""
+            />
           </div>
           <div className="steps-video">
             <div className="mobile-body">
@@ -335,7 +341,7 @@ const Hero = ({
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
-            <div className="split-item">
+            <div className="split-item celebrity">
               <div
                 className={classNames(
                   "split-item-image center-content-mobile reveal-from-bottom",
@@ -364,9 +370,9 @@ const Hero = ({
                       style={{ fontSize: "14px", paddingRight: "3%" }}
                     >
                       <p className="m-0">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore
-                        magna aliqua!
+                        "It is the easiest way to feel satisfactory about how
+                        your money is well used for some good. I thank eDOPT
+                        community for this platform"
                       </p>
                     </div>
                     <div
@@ -379,7 +385,7 @@ const Hero = ({
                       }}
                     >
                       <center>
-                        <h4 style={{ color: "black" }}>99%</h4>
+                        <h4 style={{ color: "black" }}>92%</h4>
                         <p className="m-0">Successful edoptation rate</p>
                       </center>
                     </div>
@@ -444,7 +450,11 @@ const Hero = ({
         <Carousel responsive={responsive} style={{ alignItems: "center" }}>
           <Card style={{ marginRight: "0.4%", border: "none" }}>
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src={loaded?photo('st1'):""} alt="" />
+              <img
+                className="feature-img"
+                src={loaded ? photo("st1") : ""}
+                alt=""
+              />
             </CardHeader>
             <CardBody
               style={{
@@ -452,14 +462,13 @@ const Hero = ({
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
                 margin: "1%",
+                height: "265px",
               }}
             >
-              <b style={{ fontSize: "18px" }}>
-                Rahul Lost His Father Due to Covid
-              </b>
+              <b style={{ fontSize: "18px" }}>She is Topper of her School!</b>
               <br />
-              A bright student rahul from chattisgarg lost only earning member
-              of his family to covid this march 2020
+              She is Neha Doddi, support her to continue her 12th standard
+              studies which she is lacking due to financial crisis.
               <br />
               <br className="remove-in-mobile" />
               <center>
@@ -467,10 +476,10 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href={loaded?"/Profile1/"+students.st1._id:""}
+                  href={loaded ? "/Profile1/" + students.st1._id : ""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT {loaded?students.st1.name:""}
+                  eDOPT {loaded ? students.st1.name : ""}
                 </Button>
               </center>
             </CardBody>
@@ -479,7 +488,11 @@ const Hero = ({
             style={{ marginLeft: "0.4%", marginRight: "0.4%", border: "none" }}
           >
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src={loaded?photo('st2'):""}alt="" />
+              <img
+                className="feature-img"
+                src={loaded ? photo("st2") : ""}
+                alt=""
+              />
             </CardHeader>
             <CardBody
               style={{
@@ -487,14 +500,14 @@ const Hero = ({
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
                 margin: "1%",
+                height: "265px",
               }}
             >
-              <b style={{ fontSize: "18px" }}>
-                Rahul Lost His Father Due to Covid
-              </b>
+              <b style={{ fontSize: "18px" }}>Meenu has to quit her dream.</b>
               <br />
-              A bright student rahul from chattisgarg lost only earning member
-              of his family to covid this march 2020
+              She is bright and intuitive girl who have to quit her dream of
+              becoming a doctor due to her family problems. Help her to persue
+              her passion and live her dream.
               <br />
               <br className="remove-in-mobile" />
               <center>
@@ -502,17 +515,21 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href={loaded?"/Profile1/"+students.st1._id:""}
+                  href={loaded ? "/Profile1/" + students.st1._id : ""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT {loaded?students.st2.name:""}
+                  eDOPT {loaded ? students.st2.name : ""}
                 </Button>
               </center>
             </CardBody>
           </Card>
           <Card style={{ marginLeft: "0.4%", border: "none" }}>
             <CardHeader style={{ padding: "0px 0 5px 0", margin: "1%" }}>
-              <img src={loaded?photo('st3'):""}alt="" />
+              <img
+                className="feature-img"
+                src={loaded ? photo("st3") : ""}
+                alt=""
+              />
             </CardHeader>
             <CardBody
               style={{
@@ -520,14 +537,13 @@ const Hero = ({
                 fontSize: "15px",
                 backgroundColor: "#fbe192",
                 margin: "1%",
+                height: "265px",
               }}
             >
-              <b style={{ fontSize: "18px" }}>
-                Rahul Lost His Father Due to Covid
-              </b>
+              <b style={{ fontSize: "18px" }}>Help Him to Reach His Goal</b>
               <br />
-              A bright student rahul from chattisgarg lost only earning member
-              of his family to covid this march 2020
+              He is a brilliant student and want to pursue business. Support and
+              help him in completing his studies.
               <br />
               <br className="remove-in-mobile" />
               <center>
@@ -535,10 +551,10 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href={loaded?"/Profile1/"+students.st3._id:""}
+                  href={loaded ? "/Profile1/" + students.st3._id : ""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
-                  eDOPT {loaded?students.st3.name:""}
+                  eDOPT {loaded ? students.st3.name : ""}
                 </Button>
               </center>
             </CardBody>
@@ -598,7 +614,7 @@ const Hero = ({
         <br />
         <br className= "remove-in-mobile" />
         <br className= "remove-in-mobile" />
-            */}
+            
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -657,7 +673,7 @@ const Hero = ({
         <br />
         <br className="remove-in-mobile" />
         <br className="remove-in-mobile" />
-        {/*
+        
         <center>
           <h4 style={{ color: "black" }}>Featured In</h4>
         </center>
@@ -695,7 +711,7 @@ const Hero = ({
             </center>
           </div>
         </Carousel>
-        <br /> */}
+        <br /> 
         <br className="remove-in-mobile" />
         <b style={{ color: "black" }}>
           Have a question? chat with us on Whatsapp
@@ -712,7 +728,7 @@ const Hero = ({
           }}
         >
           Chat With Us
-        </Button>
+        </Button>*/}
         <br />
         <br />
         <br />

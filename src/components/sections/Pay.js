@@ -113,7 +113,7 @@ function App(props) {
 			return
 		}
 
-		const data = await fetch('http://localhost:3000/payment', { 
+		const data = await fetch(process.PAYMENT, { 
 			method: 'POST' ,
 			headers: {'Content-Type': 'application/json'},
 			body:JSON.stringify({
@@ -129,7 +129,7 @@ function App(props) {
 		console.log(data)
 
 		const options = {
-			key: __DEV__ ? 'rzp_test_wvlFLNZqHLYzPM' : 'PRODUCTION_KEY',
+			key: __DEV__ ? 'rzp_test_wvlFLNZqHLYzPM' : process.env.PRODUCTION_KEY,
 			currency: data.currency,
 			amount: data.amount.toString(),
 			order_id: data.id,
