@@ -84,7 +84,7 @@ function getCookie(name) {
 }
 const [email,setEmail]=useState(getCookie('email'))
 useEffect(() => {
-    //console.log(getCookie('email'))
+    console.log(getCookie('email'))
     if  (email){
     axios.get('/donorDashboard', {
         headers : {
