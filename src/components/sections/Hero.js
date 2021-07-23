@@ -225,7 +225,7 @@ const Hero = ({
               tag="a"
               color="primary"
               wideMobile
-              href="/Signup_Donor"
+              href="/Signup_Student"
               style={{ backgroundColor: "#f1b12a", borderRadius: "5px" }}
             >
               Start a Fundraiser
@@ -331,8 +331,29 @@ const Hero = ({
           </div>
           <div className="steps-video">
             <div className="mobile-body">
-              <div className="mobile-header"></div>
-              <div className="mobile-screen"></div>
+              <div className="mobile-header">
+                <div className="header-camera"> </div>
+                <div className="header-div"> </div>
+              </div>
+              <div className="mobile-screen">
+                <video
+                  id="how-it-works-video"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  dynamic-slide-video
+                  status
+                >
+                  <source
+                    src={require("./../../assets/images/videoEdopt.mp4")}
+                    type="video/mp4"
+                  />
+                  <p>
+                    Your user agent does not support the HTML5 Video element.
+                  </p>
+                </video>
+              </div>
               <div className="mobile-footer"></div>
             </div>
           </div>
@@ -410,7 +431,7 @@ const Hero = ({
         </div>
         <br className="remove-in-mobile" />
         <br className="remove-in-mobile" />
-        <center>
+        {/*<center>
           <ButtonGroup>
             <Button
               tag="a"
@@ -440,9 +461,8 @@ const Hero = ({
               Reach out to us for edoptation
             </Button>
           </ButtonGroup>
-        </center>
-        <br />
-        <br className="remove-in-mobile" />
+        </center>*/}
+
         <br className="remove-in-mobile" />
         <img src="s5.png" alt="" style={{ width: "40%" }} />
         <br />

@@ -2,6 +2,29 @@
   display: block;
 }
 
+.header-div {
+  border-radius: 15px;
+  width: 110px;
+  border: 2px solid black;
+  /* margin-top: auto; */
+  /* margin-bottom: auto; */
+  height: 10px;
+  justify-content: center;
+  background-color: black;
+  margin: auto;
+  display: inline-block;
+  border-radius: 28;
+}
+
+.header-camera {
+  border: 2px solid black;
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background-color: #ccc;
+}
+
 .feed-student {
   width: 60%;
   justify-content: center;
@@ -324,6 +347,7 @@ p {
 
   .mobile-body {
     height: 287px;
+    border-radius: 14px;
   }
   .mobile-header {
     height: 25px;
@@ -333,7 +357,7 @@ p {
   }
 
   .steps-video {
-    width: 47%;
+    width: 42%;
   }
 
   .web-footer {
@@ -349,5 +373,38 @@ p {
   .feed-student {
     margin-left: auto;
     margin-right: auto;
+  }
+  .mobile-body .mobile-header {
+    height: 20px;
+  }
+  .mobile-body .mobile-footer {
+    height: 18px;
+  }
+  .celebrity {
+    width: 100%;
+  }
+  .header-camera {
+    border: 2px solid black;
+    display: inline-block;
+    height: 9px;
+    width: 9px;
+    border-radius: 50%;
+    margin-left: 5px;
+    margin-right: 9px;
+    margin-bottom: 8px;
+    background-color: #ccc;
+  }
+  .header-div {
+    border-radius: 15px;
+    width: 47px;
+    border: 2px solid black;
+    /* margin-top: auto; */
+    margin-bottom: 10px;
+    height: 4px;
+    justify-content: center;
+    background-color: black;
+    /* margin: auto; */
+    display: inline-block;
+    border-radius: 28;
   }
 }
