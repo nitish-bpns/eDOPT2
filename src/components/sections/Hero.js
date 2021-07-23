@@ -535,7 +535,7 @@ const Hero = ({
                   tag="a"
                   color="primary"
                   wideMobile
-                  href={loaded ? "/Profile1/" + students.st1._id : ""}
+                  href={loaded ? "/Profile1/" + students.st2._id : ""}
                   style={{ backgroundColor: "#4b5c6b", borderRadius: "5px" }}
                 >
                   eDOPT {loaded ? students.st2.name : ""}
