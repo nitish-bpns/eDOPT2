@@ -101,7 +101,7 @@ const FeaturesSplit = ({
       .get("/donorFeed", {
         params: {
           pageNo: page,
-          size: 6,
+          size: 100,
         },
       })
       .then((response) => {
@@ -123,7 +123,7 @@ const FeaturesSplit = ({
         },
         params: {
           pageNo: 1,
-          size: 6,
+          size: 100,
         },
       })
       .then((response) => {
