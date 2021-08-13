@@ -1,6 +1,6 @@
 import React, { PureComponent } from "react";
 import SimpleReactFooter from "simple-react-footer";
-import logo from "./../../assets/images/newlogo2.png";
+import logo from "./../../assets/images/eDOPT.png";
 import FS from "./partials/FooterSocial";
 import "./style.css";
 import i18n from "i18next";
@@ -9,23 +9,33 @@ import { useTranslation, initReactI18next } from "react-i18next";
 function Footer() {
   const { t } = useTranslation();
   return (
-    <div className="row" style={{ backgroundColor: "#f8d384" }}>
+    <div className="row" style={{ backgroundColor: "rgba(100, 140, 118, 0.5)" }}>
       <div
         className="columnx1"
-        style={{ textAlign: "left", color: "black", padding: "3%" }}
+        style={{ textAlign: "left", color: "black" }}
       >
         <img src={logo} alt="" style={{ width: "60%" }} />
       </div>
       <div>
+        <br />
         <a id="about" href="/About_us">
-          About Us
+          <b>About Us</b>
         </a>
+        <div
+          style={{
+            // fontFamily: "mitr",
+            color: "Black",
+            fontSize: "15px",
+            fontWeight: "inherit"
+          }}>
+
+          For Any Queries:
+          <br />
+          Email: info@edopt.org
+          <br />
+          Contact No: +91 7557023104
+        </div>
         <br />
-        For Any Queries:
-        <br />
-        Email: info@edopt.org
-        <br />
-        Contact No: +91 7700975559
       </div>
       {/*
       <div className="columnx2" style={{textAlign:"left", color:"black", padding:"3%"}}>

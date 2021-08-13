@@ -70,6 +70,8 @@ const FeaturesSplit = ({
   const [password, setPassword] = useState("");
   const [confirmp, setConfirmp] = useState("");
 
+
+
   //function to validate email
   const [is_valid, setIs_valid] = useState(true);
   const ValidateEmail = (e) => {
@@ -97,6 +99,8 @@ const FeaturesSplit = ({
       setPis_valid(false);
     }
   };
+
+
 
   const [redirectlogin, setRedirectlogin] = useState(false);
   const sighnuphandler = (e) => {
@@ -148,6 +152,8 @@ const FeaturesSplit = ({
   if (redirectlogin) {
     return <Redirect to={{ pathname: "/Login_Donor", state: {} }} />;
   } else {
+
+
     return (
       <section {...props} className={outerClasses}>
         <div className="container">
@@ -165,12 +171,15 @@ const FeaturesSplit = ({
                   Lorem Ipsum
                 </h3> */}
                   <p className="m-0">
-                    <form>
+                    <form action="/data.php" method="get">
                       <Input
+                        onKeyPress="return /[a-z]/i.test(event.key)"
                         id="newsletter"
-                        type="name"
+                        type="text"
                         hasIcon="right"
                         placeholder="Your Name"
+
+
                         name="name"
                         style={{
                           marginTop: "4%",
@@ -196,7 +205,7 @@ const FeaturesSplit = ({
                         <div className="column" style={{ paddingRight: "1%" }}>
                           <Input
                             id="newsletter"
-                            type="name"
+                            type="text"
                             hasIcon="right"
                             placeholder="Your City"
                             name="city"
@@ -214,7 +223,7 @@ const FeaturesSplit = ({
                         <div className="column" style={{ paddingLeft: "1%" }}>
                           <Input
                             id="newsletter"
-                            type="name"
+                            type="number"
                             hasIcon="right"
                             placeholder="Your Pincode"
                             name="pin"
@@ -234,7 +243,7 @@ const FeaturesSplit = ({
                         <div className="column" style={{ paddingRight: "1%" }}>
                           <Input
                             id="newsletter"
-                            type="name"
+                            type="number"
                             hasIcon="right"
                             placeholder="Your Age"
                             name="age"
@@ -250,9 +259,9 @@ const FeaturesSplit = ({
                           ></Input>
                         </div>
                         <div className="column" style={{ paddingLeft: "1%" }}>
-                          <Input
+                          <select
                             id="newsletter"
-                            type="name"
+                            className="select"
                             hasIcon="right"
                             placeholder="Your Gender"
                             name="gender"
@@ -260,12 +269,38 @@ const FeaturesSplit = ({
                               marginTop: "4%",
                               borderRadius: "20px",
                               borderColor: "grey",
+                              display: "block",
+                              fontSize: "16px",
+                              lineHeight: "24px",
+                              letterSpacing: "-0.1px",
+                              padding: "11px 15px",
+                              height: "48px",
+                              color: "#Abadad",
+                              boxShadow: "none",
+                              maxWidth: "100%",
+                              width: "100%",
+                              backgroundColor: "#eceded",
+
+
                             }}
                             onChange={(e) => {
                               setGender(e.target.value);
                             }}
                             value={gender}
-                          ></Input>
+                          >
+                            <option style={{
+                              color: "black",
+                            }}>
+                              Gender</option>
+                            <option style={{
+                              color: "black",
+                            }}>Male</option>
+                            <option style={{
+                              color: "#151719",
+                            }}>Female</option>
+
+
+                          </select>
                         </div>
                       </div>
                       <Input
@@ -286,7 +321,7 @@ const FeaturesSplit = ({
                       ></Input>
                       <Input
                         id="newsletter"
-                        type="name"
+                        type="number"
                         hasIcon="right"
                         placeholder="Your Phone"
                         name="phone"
@@ -302,7 +337,7 @@ const FeaturesSplit = ({
                       ></Input>
                       <Input
                         id="newsletter"
-                        type="name"
+                        type="email"
                         hasIcon="right"
                         placeholder="Your Email"
                         name="email"
@@ -314,7 +349,7 @@ const FeaturesSplit = ({
                         onChange={ValidateEmail}
                         value={email}
                       ></Input>
-                      {is_valid ? "" : <p>please enter valid email id</p>}
+                      {is_valid ? "" : <p>  Please enter valid email id</p>}
                       <div className="row" style={{ marginTop: "2%" }}>
                         <div className="column" style={{ paddingRight: "1%" }}>
                           <Input
@@ -374,7 +409,7 @@ const FeaturesSplit = ({
                           onClick={sighnuphandler}
                           className="button button-primary button-wide-mobile button-sm"
                           style={{
-                            backgroundColor: "#f1b12a",
+                            backgroundColor: "#3a936c",
                             borderRadius: "20px",
                           }}
                         >
@@ -396,7 +431,7 @@ const FeaturesSplit = ({
                   data-reveal-container=".split-item"
                 >
                   <Image
-                    src={require("./../../assets/images/newlogo.jpeg")}
+                    src={require("./../../assets/images/eDOPT.png")}
                     alt="Features split 01"
                     width={528}
                     height={396}

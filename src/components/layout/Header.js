@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
-import { Link,Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import Logo from "./partials/Logo";
 import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
@@ -288,13 +288,13 @@ const Header = ({
   );
 
   //const { t, i18n } = useTranslation();
-  
+
   function getCookie(name) {
     if (document.cookie && document.cookie !== '') {
       var cookies = document.cookie.split(';');
       for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i].trim();
-        var cookieValue=0
+        var cookieValue = 0
         if (cookie.substring(0, name.length + 1) === (name + '=')) {
           cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
           break;
@@ -303,34 +303,34 @@ const Header = ({
     }
     return cookieValue;
   }
-  const [email,setEmail]=useState(getCookie('email'))
-  const [log,setLog]=useState(false)
+  const [email, setEmail] = useState(getCookie('email'))
+  const [log, setLog] = useState(false)
 
-  useEffect(()=>{
-      axios.get('/isloggedin',{headers:{email:email},withCredentials:true})
-      .then((response)=>{
+  useEffect(() => {
+    axios.get('/isloggedin', { headers: { email: email }, withCredentials: true })
+      .then((response) => {
         console.log(response.data)
-        if (response.data.status){setLog(true)}  
-        else{setLog(false)}  
-          
-      }).catch((err)=>{
+        if (response.data.status) { setLog(true) }
+        else { setLog(false) }
+
+      }).catch((err) => {
         setLog(false)
       })
-  },[]);
-  const [redirecthome,setRedirectHome]=useState(false)
-  const logouthandler=(e)=>{
+  }, []);
+  const [redirecthome, setRedirectHome] = useState(false)
+  const logouthandler = (e) => {
     document.cookie = "email=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    axios.get('/logout',{withCredentials:true})
-    .then((response)=>{
-      setRedirectHome(true)
-    })
-  }  
-
-  if (redirecthome){
-    return(<Redirect to={{pathname:"/Login_Donor",state:{'redirected':true}}} />)
+    axios.get('/logout', { withCredentials: true })
+      .then((response) => {
+        setRedirectHome(true)
+      })
   }
 
-  if (log){
+  if (redirecthome) {
+    return (<Redirect to={{ pathname: "/Login_Donor", state: { 'redirected': true } }} />)
+  }
+
+  if (log) {
     return (
       <header {...props} className={classes}>
         <div className="container">
@@ -389,7 +389,7 @@ const Header = ({
                             Dashboard
                           </Link>
                         </li>
-                       
+
                         <li>
                           <button
                             className="button button-primary button-wide-mobile button-sm"
@@ -404,7 +404,7 @@ const Header = ({
                             Logout
                           </button>
                         </li>
-                        
+
                       </ul>
                     )}
                   </div>
@@ -416,42 +416,42 @@ const Header = ({
       </header>
     );
   }
-  else{
+  else {
 
-  return (
-    <header {...props} className={classes}>
-      <div className="container">
-        <div
-          className={classNames(
-            "site-header-inner",
-            bottomDivider && "has-bottom-divider"
-          )}
-        >
-          <Logo />
-          {!hideNav && (
-            <>
-              <button
-                ref={hamburger}
-                className="header-nav-toggle"
-                onClick={isActive ? closeMenu : openMenu}
-              >
-                <span className="screen-reader">Menu</span>
-                <span className="hamburger">
-                  <span className="hamburger-inner"></span>
-                </span>
-              </button>
-              <nav
-                ref={nav}
-                className={classNames("header-nav", isActive && "is-active")}
-              >
-                <div className="header-nav-inner">
-                  <ul
-                    className={classNames(
-                      "list-reset text-xs",
-                      navPosition && `header-nav-${navPosition}`
-                    )}
-                  >
-                    {/* <li>
+    return (
+      <header {...props} className={classes}>
+        <div className="container">
+          <div
+            className={classNames(
+              "site-header-inner",
+              bottomDivider && "has-bottom-divider"
+            )}
+          >
+            <Logo />
+            {!hideNav && (
+              <>
+                <button
+                  ref={hamburger}
+                  className="header-nav-toggle"
+                  onClick={isActive ? closeMenu : openMenu}
+                >
+                  <span className="screen-reader">Menu</span>
+                  <span className="hamburger">
+                    <span className="hamburger-inner"></span>
+                  </span>
+                </button>
+                <nav
+                  ref={nav}
+                  className={classNames("header-nav", isActive && "is-active")}
+                >
+                  <div className="header-nav-inner">
+                    <ul
+                      className={classNames(
+                        "list-reset text-xs",
+                        navPosition && `header-nav-${navPosition}`
+                      )}
+                    >
+                      {/* <li>
                       <Link to="/" onClick={closeMenu}>{t('key3')}</Link>
                     </li>
                     <li>
@@ -460,62 +460,62 @@ const Header = ({
                     <li>
                       <Link to="/News_Donor" onClick={closeMenu}>{t('key5')}</Link>
                     </li> */}
-                  </ul>
-                  {!hideSignin && (
-                    <ul className="list-reset header-nav-right">
-                      <li>
-                        <Link
-                          to="/Signup_Student"
-                          className="button button-primary button-wide-mobile button-sm"
-                          onClick={closeMenu}
-                          style={{
-                            backgroundColor: "#f1b12a",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          Start a Fundraiser
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/Feed_Donor/1"
-                          className="button button-primary button-wide-mobile button-sm"
-                          onClick={closeMenu}
-                          style={{
-                            backgroundColor: "#f1b12a",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          eDOPT a Child
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to="/Login_Donor"
-                          className="button button-primary button-wide-mobile button-sm"
-                          onClick={closeMenu}
-                          style={{
-                            backgroundColor: "#ffffff",
-                            borderRadius: "5px",
-                            borderColor: "#f1b12a",
-                            color: "#f1b12a",
-                          }}
-                        >
-                          Login/Signup
-                        </Link>
-                      </li>
-                      
                     </ul>
-                  )}
-                </div>
-              </nav>
-            </>
-          )}
+                    {!hideSignin && (
+                      <ul className="list-reset header-nav-right">
+                        <li>
+                          <Link
+                            to="/Signup_Student"
+                            className="button button-primary button-wide-mobile button-sm"
+                            onClick={closeMenu}
+                            style={{
+                              backgroundColor: "#3a936c",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            For Student
+                          </Link>
+                        </li>
+                        {/* <li>
+                          <Link
+                            to="/Feed_Donor/1"
+                            className="button button-primary button-wide-mobile button-sm"
+                            onClick={closeMenu}
+                            style={{
+                              backgroundColor: "#3a936c",
+                              borderRadius: "5px",
+                            }}
+                          >
+                            eDOPT a Child
+                          </Link>
+                        </li> */}
+                        <li>
+                          <Link
+                            to="/Login_Donor"
+                            className="button button-primary button-wide-mobile button-sm"
+                            onClick={closeMenu}
+                            style={{
+                              backgroundColor: "#ffffff",
+                              borderRadius: "5px",
+                              borderColor: "#3a936c",
+                              color: "#3a936c",
+                            }}
+                          >
+                            Login/Signup
+                          </Link>
+                        </li>
+
+                      </ul>
+                    )}
+                  </div>
+                </nav>
+              </>
+            )}
+          </div>
         </div>
-      </div>
-    </header>
-  );
-};
+      </header>
+    );
+  };
 }
 
 Header.propTypes = propTypes;

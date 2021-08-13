@@ -78,11 +78,11 @@ const FeaturesSplit = ({
     }
   };
 
-  const createCookieInHour =(cookieName, cookieValue, hourToExpire) => {
+  const createCookieInHour = (cookieName, cookieValue, hourToExpire) => {
     let date = new Date();
-    date.setTime(date.getTime()+(hourToExpire*60*60*1000));
-    document.cookie = cookieName + " = " + cookieValue + "; expires = " +date.toGMTString();
-}
+    date.setTime(date.getTime() + (hourToExpire * 60 * 60 * 1000));
+    document.cookie = cookieName + " = " + cookieValue + "; expires = " + date.toGMTString();
+  }
 
   const [state, setState] = useState(stateredirect());
 
@@ -110,7 +110,7 @@ const FeaturesSplit = ({
         //console.log('success')
         //console.log(response)
         if (response.data.status) {
-          createCookieInHour('email',response.data.email,120)
+          createCookieInHour('email', response.data.email, 120)
           if (response.data.redirect != "undefined") {
             setRedirectPath(response.data.redirect);
           }
@@ -198,7 +198,7 @@ const FeaturesSplit = ({
                           type="submit"
                           className="button button-primary button-wide-mobile button-sm"
                           style={{
-                            backgroundColor: "#3d946e",
+                            backgroundColor: "#3a936c",
                             borderRadius: "20px",
                           }}
                         >
@@ -220,7 +220,7 @@ const FeaturesSplit = ({
                   data-reveal-container=".split-item"
                 >
                   <Image
-                    src={require("./../../assets/images/newlogo.jpeg")}
+                    src={require("./../../assets/images/eDOPT.png")}
                     alt="Features split 01"
                     width={528}
                     height={396}

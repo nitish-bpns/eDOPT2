@@ -9,13 +9,12 @@ import i18n from "i18next";
 import { useTranslation, initReactI18next } from "react-i18next";
 import './style.css';
 
-function matchPassword() {  
-    var pw1 = document.getElementById("pswd1");  
-    var pw2 = document.getElementById("pswd2");
-    if(pw1 != pw2)  
-    {
-        document.getElementById("message").innerHTML = "**Passwords are not same";  
-  }  
+function matchPassword() {
+  var pw1 = document.getElementById("pswd1");
+  var pw2 = document.getElementById("pswd2");
+  if (pw1 != pw2) {
+    document.getElementById("message").innerHTML = "**Passwords are not same";
+  }
 }
 
 const propTypes = {
@@ -94,10 +93,10 @@ const FeaturesSplit = ({
                     </Input>
                     <Input id="pswd2" type="password" hasIcon="right" placeholder="Confirm Password" name="confirm-pass" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
                     </Input>
-                    <span id = "message" style={{color:"red"}}> </span>                    
+                    <span id="message" style={{ color: "red" }}> </span>
                     <br />
                     <center>
-                      <Link to="/Login_Donor" className="button button-primary button-wide-mobile button-sm" onClick= {matchPassword}  style={{ backgroundColor: "#f1b12a", borderRadius: "20px" }}>Confirm</Link>
+                      <Link to="/Login_Donor" className="button button-primary button-wide-mobile button-sm" onClick={matchPassword} style={{ backgroundColor: "#f1b12a", borderRadius: "20px" }}>Confirm</Link>
                     </center>
                   </form>
                 </p>
@@ -109,7 +108,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('./../../assets/images/newlogo.jpeg')}
+                  src={require('./../../assets/images/eDOPT.png')}
                   alt="Features split 01"
                   width={528}
                   height={396} />

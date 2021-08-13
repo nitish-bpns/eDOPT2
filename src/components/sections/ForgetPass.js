@@ -81,7 +81,7 @@ const FeaturesSplit = ({
                   <form>
                     <Input id="newsletter" type="email" hasIcon="right" placeholder="Enter Your Email" name="email" style={{ marginTop: "4%", borderRadius: "20px", borderColor: "grey" }}>
                     </Input>
-                    
+
                     <br />
                     <center>
                       <Link to="/CreateNewPass" className="button button-primary button-wide-mobile button-sm" onClick="" style={{ backgroundColor: "#f1b12a", borderRadius: "20px" }}>Continue</Link>
@@ -96,7 +96,7 @@ const FeaturesSplit = ({
                 )}
                 data-reveal-container=".split-item">
                 <Image
-                  src={require('./../../assets/images/newlogo.jpeg')}
+                  src={require('./../../assets/images/eDOPT.png')}
                   alt="Features split 01"
                   width={528}
                   height={396} />

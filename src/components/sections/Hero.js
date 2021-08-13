@@ -15,6 +15,7 @@ import photo from "./../../assets/images/ss2.png";
 import { useTranslation, initReactI18next } from "react-i18next";
 import axios from "../../api/axios";
 
+
 const URL = "./../../assets/images/ss2.png";
 
 const MAP = {
@@ -65,6 +66,26 @@ const responsive = {
   },
 };
 
+const responsiveNews = {
+  superLargeDesktop: {
+    // the naming can be any, depends on you.
+    breakpoint: { max: 4000, min: 3000 },
+    items: 1,
+  },
+  desktop: {
+    breakpoint: { max: 3000, min: 1024 },
+    items: 1,
+  },
+  tablet: {
+    breakpoint: { max: 1024, min: 464 },
+    items: 1,
+  },
+  mobile: {
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+  },
+};
+
 const propTypes = {
   ...SectionProps.types,
 };
@@ -105,7 +126,8 @@ const Hero = ({
     bottomOuterDivider && "has-bottom-divider",
     hasBgColor && "has-bg-color",
     invertColor && "invert-color",
-    className
+
+
   );
 
   //const { t } = useTranslation();
@@ -156,8 +178,10 @@ const Hero = ({
   };
 
   return (
-    <section {...props} className={outerClasses}>
-      <div className="container">
+    <section {...props} className={outerClasses} className="bodyColor"
+
+    >
+      <div className="container" >
         {/* <img src={require('./../../assets/images/ss2.png')} alt="" usemap="#image-map"/>
         <map name="image-map">
             <area target="_self" alt="Signin Button" title="Signin Button" href="/Signup_Donor" coords="59,319,371,406" shape="rect"/>
@@ -170,35 +194,61 @@ const Hero = ({
                 className="split-item-content center-content-mobile reveal-from-left"
                 data-reveal-container=".split-item"
               >
-                <div className="container-xs">
+                <div className="container-xs" styles={{
+                  backgroundColor: "rgba(0, 151, 19, 0.3)",
+                  boxShadow: "inset 0px 30px 30px -30px #000000",
+
+                }}>
                   <div
                     style={{
                       textAlign: "left",
                       marginTop: "2%",
                       marginLeft: "1%",
                       marginBottom: "5%",
+
                     }}
                   >
-                    <img src="ss3.png" alt="" />
+                    <p
+                      style={{
+                        // fontFamily: "mitr",
+                        color: "#3a936c",
+                        fontSize: "50px",
+                      }}
+                    >Be a hero!</p>
+                    <p
+                      style={{
+                        // fontFamily: "mitr",
+                        color: "Black",
+                        fontSize: "20px",
+                        fontWeight: "inherit"
+                      }}>
+                      Empowering Life one at a time, Virtually edopt one mertitious students who lack means.
+                    </p>
                   </div>
-                  <div className="reveal-from-bottom" data-reveal-delay="600">
-                    <ButtonGroup>
-                      <Button
-                        tag="a"
-                        color="primary"
-                        wideMobile
-                        href="/Signup_Donor"
-                        style={{
-                          backgroundColor: "#f1b12a",
-                          borderRadius: "5px",
-                        }}
-                      >
-                        Change One Life
-                      </Button>
-                    </ButtonGroup>
-                  </div>
+                  <left>
+                    <div className="reveal-from-bottom" data-reveal-delay="600">
+                      <ButtonGroup>
+
+                        <Button
+                          tag="a"
+                          color="primary"
+                          wideMobile
+                          href="/Signup_Donor"
+                          style={{
+                            backgroundColor: "#3a936c",
+                            borderRadius: "5px",
+
+                          }}
+                        >
+                          edopt now!
+                        </Button>
+                      </ButtonGroup>
+                    </div>
+                  </left>
                 </div>
               </div>
+
+
               <div
                 className={classNames(
                   "split-item-image center-content-mobile reveal-from-bottom",
@@ -209,100 +259,454 @@ const Hero = ({
                 <img src="ss1.png" alt="" style={{ width: "88%" }} />
               </div>
             </div>
-            <img src={require("./../../assets/images/ss2(1).jpg")} alt="" />
           </div>
         </div>
-        <br />
-        <br />
-        <br className="remove-in-mobile" />
-        <br className="remove-in-mobile" />
-        <img src={require("./../../assets/images/ss.png")} alt="" />
-        <br />
-        <br className="remove-in-mobile" />
-        <center>
-          <ButtonGroup>
-            <Button
-              tag="a"
-              color="primary"
-              wideMobile
-              href="/Signup_Student"
-              style={{ backgroundColor: "#f1b12a", borderRadius: "5px" }}
-            >
-              Start a Fundraiser
-            </Button>
-          </ButtonGroup>
-        </center>
-        <br />
-        <br className="remove-in-mobile" />
-        <br className="remove-in-mobile" />
-        <div className={innerClasses}>
-          <SectionHeader data={sectionHeader} className="center-content" />
-          <div className={splitClasses}>
-            <div className="split-item">
-              <div
-                className={classNames(
-                  "split-item-image center-content-mobile reveal-from-bottom",
-                  imageFill && "split-item-image-fill"
-                )}
-                data-reveal-container=".split-item"
-              >
-                <img src="s2.png" alt="" style={{ width: "88%" }} />
-              </div>
-              <div
-                className="split-item-content center-content-mobile reveal-from-left"
-                data-reveal-container=".split-item"
-              >
-                <div className="container-xs">
-                  <div
-                    className="row"
-                    style={{
-                      textAlign: "left",
-                      marginTop: "2%",
-                      marginLeft: "1%",
-                      marginBottom: "5%",
-                    }}
-                  >
-                    <div
-                      className="column"
-                      style={{ fontSize: "14px", paddingRight: "3%" }}
-                    >
-                      <p className="m-0">
-                        "If we want to reach real peace in this world, we should
-                        start educating children"
-                        <br />~ Mahatma Gandhi
-                      </p>
-                    </div>
-                    <div
-                      className="column"
+        {/* <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" /> */}
+        {/* <img src={require("./../../assets/images/ss.png")} alt="" /> */}
+        {/* <br />*/
+          <div>
+            <Carousel responsive={responsive}>
+              <div className="stdCard">
+                <center>
+                  <Card style={{
+                    padding: "4px",
+                    borderRadius: "15px",
+                    border: "5px",
+                    margin: "10px",
+                    borderTopRightRadius: "15px",
+                    boxShadow: "0px 0px 20px #617264",
+                  }}>
+                    <CardHeader style={{
+                      padding: "20px 20px 20px", margin: "0%"
+                    }}>
+                      <img
+                        className="feature-img"
+                        src="sakshi.jpg"
+                        alt=""
+                      />
+                    </CardHeader>
+                    <CardBody
                       style={{
-                        fontSize: "14px",
-                        paddingLeft: "3%",
-                        borderLeft: "1px solid #adb9c5",
-                        textAlign: "center",
+                        textAlign: "left",
+                        fontSize: "15px",
+
+                        margin: "0%",
+                        height: "230px",
+                        color: "rgba(0, 0, 0, 0.7)",
+                        paddingLeft: "40px",
                       }}
                     >
+                      <b style={{ fontSize: "18px" }}>Sakshi</b>
+                      <br />
+                      Location: Delhi<br />
+                      Age: 6 years<br />
+                      Teacher
+                      <br className="remove-in-mobile" />
+                      <br className="remove-in-mobile" />
                       <center>
-                        <h4 style={{ color: "black" }}>35+</h4>
-                        <p className="m-0">
-                          Children have registered themselves and cleared
-                          adoptation interview to change their lives forever...
-                        </p>
+                        <Button
+                          tag="a"
+                          color="primary"
+                          wideMobile
+                          href="/sakshi"
+                          style={{ backgroundColor: "#4b5c6b", marginTop: "18px", borderRadius: "5px" }}
+                        >
+                          Profile of Sakshi
+                        </Button>
                       </center>
-                    </div>
+                    </CardBody>
+                  </Card>
+                </center>
+              </div>
+              <div className="stdCard">
+                <center>
+                  <Card style={{
+                    padding: "4px",
+                    borderRadius: "15px",
+                    border: "none",
+                    margin: "10px",
+                    boxShadow: "0px 0px 20px #617264",
+                  }}>
+                    <CardHeader style={{
+                      padding: "20px 20px 20px", marginTop: "0%"
+                    }}>
+                      <img
+                        className="feature-img"
+                        src="jatin.jpg"
+                        alt=""
+                      />
+                    </CardHeader>
+                    <CardBody
+                      style={{
+                        textAlign: "left",
+                        fontSize: "15px",
+
+                        margin: "0%",
+                        height: "230px",
+                        color: "rgba(0, 0, 0, 0.7)",
+                        paddingLeft: "40px",
+                      }}
+                    >
+                      <b style={{ fontSize: "18px" }}>Jatin</b>
+                      <br />
+                      Location: Karnal<br />
+                      Age: 15 years<br />
+                      Dancer
+                      <br className="remove-in-mobile" />
+                      <br className="remove-in-mobile" />
+                      <center>
+                        <Button
+                          tag="a"
+                          color="primary"
+                          wideMobile
+                          href="/jatin"
+                          style={{ backgroundColor: "#4b5c6b", marginTop: "18px", borderRadius: "5px" }}
+                        >
+                          Profile of Jatin
+                        </Button>
+                      </center>
+                    </CardBody>
+                  </Card>
+                </center>
+              </div>
+              <div className="stdCard">
+                <center>
+                  <Card style={{
+                    padding: "4px",
+                    borderRadius: "15px",
+                    border: "5px",
+                    margin: "10px",
+                    borderTopRightRadius: "15px",
+                    boxShadow: "0px 0px 20px #617264",
+                  }}>
+                    <CardHeader style={{
+                      padding: "20px 20px 20px", margin: "0%"
+                    }}>
+                      <img
+                        className="feature-img"
+                        src="diya.jpg"
+                        alt=""
+                      />
+                    </CardHeader>
+                    <CardBody
+                      style={{
+                        textAlign: "left",
+                        fontSize: "15px",
+
+                        margin: "0%",
+                        height: "230px",
+
+                        paddingLeft: "40px",
+                        color: "rgba(0, 0, 0, 0.7)"
+                      }}
+                    >
+                      <b style={{ fontSize: "18px" }}>Diya</b>
+                      <br />
+                      Location: Sonipat<br />
+                      Age: 15 years<br />
+                      Dancer
+                      <br className="remove-in-mobile" />
+                      <br className="remove-in-mobile" />
+                      <center>
+                        <Button
+                          tag="a"
+                          color="primary"
+                          wideMobile
+                          href="/diya"
+                          style={{ backgroundColor: "#4b5c6b", marginTop: "18px", borderRadius: "5px" }}
+                        >
+                          Profile of Diya
+                        </Button>
+                      </center>
+                    </CardBody>
+                  </Card>
+                </center>
+              </div>
+            </Carousel>
+            <center>
+              <Button
+                tag="a"
+                color="primary"
+                wideMobile
+                href="/myfeeds"
+                style={{
+                  backgroundColor: "#3a936c",
+                  borderRadius: "5px"
+                }}
+              >
+
+                Check All
+              </Button>
+            </center>
+            <br />
+            <br />
+            <br />
+            {/* <button href="/myfeeds"
+                className="button button-primary button-wide-mobile button-sm"
+
+                style={{
+                  backgroundColor: "#3a936c",
+                  borderRadius: "5px",
+                }} > */}
+            <center>
+              <Card style={{ padding: "4px", border: "None", width: "100%", borderRadius: "15px" }} >
+
+                {/* <CardBody
+                  // style={{
+
+                  //   // boxShadow: "0px 0px 5px #617264",
+                  //   // backgroundColor: "",
+                  //   // margin: "0%",
+                  //   // height: "650px",
+                  //   // borderRadius: "15px",
+
+                  // }}
+                  className="videoCard"
+                > */}
+                <br />
+                <b style={{ textAlign: "Center", fontSize: "30px" }}>What we do?</b>
+                <br />
+
+                <regular> <div style={{ textAlign: "center", fontSize: "20px" }}>We find meritious students who lack means and sponsor "one to one" in a transparent manner.</div></regular>
+                <br />
+                <center>
+
+
+
+                  <div className="whatwedo-video">
+                    <video
+                      id="whatwedo-video"
+                      style={{ marginTop: "0px", marginRight: "0px", marginLeft: "10px" }}
+
+                      width="100%"
+                      controls
+                      preload="none"
+                    >
+                      <source
+                        src={require("./../../assets/images/whatwedo.mp4")}
+                        type="video/mp4"
+                      />
+                      Your browser does not support the video tag.
+                    </video>
                   </div>
-                  {/* <div className="reveal-from-bottom" data-reveal-delay="600">
+                </center>
+
+                {/* </CardBody> */}
+              </Card>
+            </center>
+
+            <br />
+            <br />
+            <div className="rowIcon">
+              <div className="columnIcon">
+                <center>
+                  <img src="money.png" style={{ width: "100%" }} />Money
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="videocall.png" style={{ width: "100%" }} />Video Call
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="certi.jpg" style={{ width: "100%" }} />Certificate
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="pay.png" style={{ width: "100%" }} />Payment to Institution
+                </center>
+              </div>
+            </div>
+            <div className="rowIcon">
+              <div className="columnIcon">
+                <center>
+                  <img src="report.png" style={{ width: "100%" }} />
+                  Reports
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="events.png" style={{ width: "100%" }} />
+                  Events
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="greet.png" style={{ width: "100%" }} />
+                  Meet and Greet
+                </center>
+              </div>
+              <div className="columnIcon">
+                <center>
+                  <img src="recent.png" style={{ width: "100%" }} />
+                  Recent
+                </center>
+              </div>
+            </div>
+
+            {/* <div>
+              <card>
+                <row style={{ width: "100%", height: "100px" }}>
+                  <column>
+                    <card style={{ width: "10px", height: "10px" }}>
+                      <img src="money.png" />10k-100k/year
+                    </card>
+                  </column>
+                  <column>
+                    <card style={{ width: "10px", height: "10px" }}>
+                      <img src="videocall.png" />
+                      Video Call</card>
+                  </column>
+                  <column>
+                    <card style={{ width: "10px", height: "10px" }}>
+                      <img src="certi.jpg" />
+
+                      abc1</card>
+                  </column>
+                  <column>
+                    <card style={{ width: "10px", height: "10px" }}>
+                      <img src="Pay.png" />
+                      Payment to institution</card>
+                  </column>
+                </row>
+              </card>
+              <br />
+              <br />
+              <br />
+              <row style={{ width: "100%", height: "100px" }}>
+                <column>
+                  <card style={{ margin: "80px", width: "250px", height: "100px" }}>
+                    <img src="report.png" />10k-100k/year
+                  </card>
+                </column>
+                <column>
+                  <card style={{ margin: "80px", width: "250px", height: "100px" }}>
+                    <img src="events.png" />
+                    Video Call</card>
+                </column>
+                <column>
+                  <card style={{ margin: "80px", width: "250px", height: "100px" }}>
+                    <img src="greet.png" />
+
+                    abc1</card>
+                </column>
+                <column>
+                  <card style={{ margin: "80px", width: "250px", height: "100px" }}>
+                    <img src="recent.png" />
+                    abc1</card>
+                </column>
+              </row>
+            </div> */}
+            <br />
+            <br />
+            <br />
+            <div style={{ textAlign: "Center", fontSize: "30px", color: "black" }}>
+              <b >In the NEWS!</b>
+            </div>
+            <br />
+
+
+
+            <Carousel responsive={responsiveNews} style={{ width: "100%" }}>
+
+              <img src="news01.png" />
+              <img src="news02.png" />
+
+
+            </Carousel>
+            <br />
+          </div>
+
+            /* <br className="remove-in-mobile" />
+            <center>
+              <ButtonGroup>
+                <Button
+                  tag="a"
+                  color="primary"
+                  wideMobile
+                  href="/Signup_Student"
+                  style={{ backgroundColor: "#3a936c", borderRadius: "5px" }}
+                >
+                  Start a Fundraiser
+                </Button>
+              </ButtonGroup>
+            </center>
+            <br />
+
+            <br className="remove-in-mobile" />
+            <br className="remove-in-mobile" />
+            <div className={innerClasses}>
+              <SectionHeader data={sectionHeader} className="center-content" />
+              <div className={splitClasses}>
+                <div className="split-item">
+                  <div
+                    className={classNames(
+                      "split-item-image center-content-mobile reveal-from-bottom",
+                      imageFill && "split-item-image-fill"
+                    )}
+
+                    data-reveal-container=".split-item"
+                  >
+                    <img src="s2.png" alt="" style={{ width: "88%" }} />
+                  </div>
+                  <div
+                    className="split-item-content center-content-mobile reveal-from-left"
+                    data-reveal-container=".split-item"
+                  >
+                    <div className="container-xs">
+                      <div
+                        className="row"
+                        style={{
+                          textAlign: "left",
+                          marginTop: "2%",
+                          marginLeft: "1%",
+                          marginBottom: "5%",
+                        }}
+                      >
+                        <div
+                          className="column"
+                          style={{ fontSize: "14px", paddingRight: "3%" }}
+                        >
+                          <p className="m-0">
+                            "If we want to reach real peace in this world, we should
+                            start educating children"
+                            <br />~ Mahatma Gandhi
+                          </p>
+                        </div>
+                        <div
+                          className="column"
+                          style={{
+                            fontSize: "14px",
+                            paddingLeft: "3%",
+                            borderLeft: "1px solid #adb9c5",
+                            textAlign: "center",
+                          }}
+                        >
+                          <center>
+                            <h4 style={{ color: "black" }}>35+</h4>
+                            <p className="m-0">
+                              Children have registered themselves and cleared
+                              adoptation interview to change their lives forever...
+                            </p>
+                          </center>
+                        </div>
+                      </div>
+                      {/* <div className="reveal-from-bottom" data-reveal-delay="600">
                     <ButtonGroup >
                       <Button
                         tag="a"
                         color="primary"
                         wideMobile
                         href="/Signup_Donor"
-                        style={{ backgroundColor: "#f1b12a", borderRadius:"5px"}}
+                        style={{ backgroundColor: "#3a936c", borderRadius:"5px"}}
                       >
                         Download App
                       </Button>
                     </ButtonGroup>
-                  </div> */}
+                  </div> 
                 </div>
               </div>
             </div>
@@ -316,7 +720,7 @@ const Hero = ({
                 <br className= "remove-in-mobile" />*/}
 
         {/* steps video start */}
-        <img
+        {/* <img
           src={require("./../../assets/images/steps.png")}
           alt=""
           style={{ width: "73%" }}
@@ -359,6 +763,7 @@ const Hero = ({
           </div>
         </div>
         {/* steps video end */}
+        {/*
         <div className={innerClasses}>
           <SectionHeader data={sectionHeader} className="center-content" />
           <div className={splitClasses}>
@@ -418,12 +823,12 @@ const Hero = ({
                         color="primary"
                         wideMobile
                         href="/Signup_Donor"
-                        style={{ backgroundColor: "#f1b12a", borderRadius:"5px"}}
+                        style={{ backgroundColor: "#3a936c", borderRadius:"5px"}}
                       >
                         Download App
                       </Button>
                     </ButtonGroup>
-                  </div> */}
+                  </div> 
                 </div>
               </div>
             </div>
@@ -438,7 +843,7 @@ const Hero = ({
               color="primary"
               wideMobile
               href="/Signup_Donor"
-              style={{ backgroundColor: "#f1b12a", borderRadius: "5px" }}
+              style={{ backgroundColor: "#3a936c", borderRadius: "5px" }}
             >
               Edopt a child
             </Button>
@@ -447,7 +852,7 @@ const Hero = ({
               color="primary"
               wideMobile
               href="/Signup_Donor"
-              style={{ backgroundColor: "#f1b12a", borderRadius: "5px" }}
+              style={{ backgroundColor: "#3a936c", borderRadius: "5px" }}
             >
               Know the edoptation process
             </Button>
@@ -456,14 +861,14 @@ const Hero = ({
               color="primary"
               wideMobile
               href="/Signup_Donor"
-              style={{ backgroundColor: "#f1b12a", borderRadius: "5px" }}
+              style={{ backgroundColor: "#3a936c", borderRadius: "5px" }}
             >
               Reach out to us for edoptation
             </Button>
           </ButtonGroup>
         </center>*/}
 
-        <br className="remove-in-mobile" />
+        {/* <br className="remove-in-mobile" />
         <img src="s5.png" alt="" style={{ width: "40%" }} />
         <br />
         <br className="remove-in-mobile" />
@@ -582,7 +987,7 @@ const Hero = ({
         </Carousel>
         <br />
         <br className="remove-in-mobile" />
-        <br className="remove-in-mobile" />
+        <br className="remove-in-mobile" /> */}
         {/*}
         <img src="s4.png" alt="" style={{ width: "50%" }} />
         <br />
@@ -677,7 +1082,7 @@ const Hero = ({
                         wideMobile
                         href="/Signup_Donor"
                         style={{
-                          backgroundColor: "#f1b12a",
+                          backgroundColor: "#3a936c",
                           borderRadius: "5px",
                         }}
                       >
@@ -748,13 +1153,15 @@ const Hero = ({
           }}
         >
           Chat With Us
-        </Button>*/}
+        </Button>
         <br />
         <br />
-        <br />
-      </div>
-    </section>
+        <br />*/}
+      </div >
+    </section >
+
   );
+
 };
 
 Hero.propTypes = propTypes;

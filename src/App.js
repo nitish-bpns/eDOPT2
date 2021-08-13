@@ -40,6 +40,11 @@ import VerifiedStudent from "./components/sections/verifiedStudent";
 import Admin from "./components/sections/admin";
 import AdminLogin from "./components/sections/adminLogin";
 import StudentUpdate from "./components/sections/studentUpdate";
+// import NewFeed from "./components/sections/NewFeed";
+import Sakshi from "./components/sections/sakshi";
+import Diya from "./components/sections/diya";
+import Jatin from "./components/sections/jatin";
+import MyFeeds from "./components/sections/myfeeds";
 
 // Initialize Google Analytics
 ReactGA.initialize(process.env.REACT_APP_GA_CODE);
@@ -114,6 +119,12 @@ const App = () => {
             component={FeedDonor}
             layout={LayoutDefault}
           />
+          {/* <AppRoute
+            exact
+            path="/NewFeed"
+            component={NewFeed}
+            layout={LayoutDefault}
+          /> */}
           <AppRoute
             exact
             path="/Terms"
@@ -181,7 +192,7 @@ const App = () => {
             component={Dash1Student}
             layout={LayoutStudent}
           />
-         
+
           <AppRoute
             exact
             path="/Profile/:userId"
@@ -214,6 +225,12 @@ const App = () => {
           />
           <AppRoute
             exact
+            path="/Myfeeds"
+            component={MyFeeds}
+            layout={LayoutDefault}
+          />
+          <AppRoute
+            exact
             path="/Terms/:userId"
             component={Terms}
             layout={LayoutDonor}
@@ -236,7 +253,25 @@ const App = () => {
             component={FeedDonor}
             layout={LayoutDefault}
           />
-          
+          <AppRoute
+            exact
+            path="/sakshi"
+            component={Sakshi}
+            layout={LayoutDefault}
+          />
+          <AppRoute
+            exact
+            path="/diya"
+            component={Diya}
+            layout={LayoutDefault}
+          />
+          <AppRoute
+            exact
+            path="/Jatin"
+            component={Jatin}
+            layout={LayoutDefault}
+          />
+
           <AppRoute
             exact
             path="/VerifyStudent"
@@ -267,7 +302,6 @@ const App = () => {
             component={StudentUpdate}
             layout={LayoutAdmin}
           />
-
         </Switch>
       )}
     />
